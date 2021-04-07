@@ -16,7 +16,7 @@
     using std::deque;
 #endif
 
-template<class OrderIndex_ = int>
+template<class OrderIndex_ = long>
 struct VectorChains
 {
     typedef             OrderIndex_                                             OrderIndex;
@@ -26,7 +26,7 @@ struct VectorChains
     { typedef           VectorChains<U>         other; };
 };
 
-template<class OrderIndex_ = int>
+template<class OrderIndex_ = long>
 struct DequeChains
 {
     typedef             OrderIndex_                                             OrderIndex;
@@ -36,7 +36,7 @@ struct DequeChains
     { typedef           DequeChains<U>         other; };
 };
 
-template<class OrderIndex_ = int>
+template<class OrderIndex_ = long>
 struct ListChains
 {
     typedef             OrderIndex_                                             OrderIndex;
