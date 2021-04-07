@@ -88,7 +88,7 @@ Convert files to use longs instead of ints
         #. DONE : src/utilities/munkres/munkres.h
         #. DONE : src/utilities/munkres/matrix.h
         #. DONE : src/utilities/munkres/munkres.cpp
-        #. src/utilities/munkres/matrix.hpp
+        #. DONE : src/utilities/munkres/matrix.hpp
         #. src/grid.h
         #. src/topology/order.h
         #. src/topology/dynamic-persistence.h

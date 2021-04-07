@@ -35,8 +35,8 @@ Matrix<T>::Matrix(const Matrix<T> &other) {
 		// copy arrays
 		m_matrix = NULL;
 		resize(other.m_rows, other.m_columns);
-		for ( int i = 0 ; i < m_rows ; i++ )
-			for ( int j = 0 ; j < m_columns ; j++ )
+		for ( long i = 0 ; i < m_rows ; i++ )
+			for ( long j = 0 ; j < m_columns ; j++ )
 				m_matrix[i][j] = other.m_matrix[i][j];
 	} else {
 		m_matrix = NULL;
@@ -46,7 +46,7 @@ Matrix<T>::Matrix(const Matrix<T> &other) {
 }
 
 /*export*/ template <class T>
-Matrix<T>::Matrix(int rows, int columns) {
+Matrix<T>::Matrix(long rows, long columns) {
 	m_matrix = NULL;
 	resize(rows, columns);
 }
@@ -57,12 +57,12 @@ Matrix<T>::operator= (const Matrix<T> &other) {
 	if ( other.m_matrix != NULL ) {
 		// copy arrays
 		resize(other.m_rows, other.m_columns);
-		for ( int i = 0 ; i < m_rows ; i++ )
-			for ( int j = 0 ; j < m_columns ; j++ )
+		for ( long i = 0 ; i < m_rows ; i++ )
+			for ( long j = 0 ; j < m_columns ; j++ )
 				m_matrix[i][j] = other.m_matrix[i][j];
 	} else {
 		// free arrays
-		for ( int i = 0 ; i < m_columns ; i++ )
+		for ( long i = 0 ; i < m_columns ; i++ )
 			delete [] m_matrix[i];
 
 		delete [] m_matrix;
@@ -79,7 +79,7 @@ Matrix<T>::operator= (const Matrix<T> &other) {
 Matrix<T>::~Matrix() {
 	if ( m_matrix != NULL ) {
 		// free arrays
-		for ( int i = 0 ; i < m_rows ; i++ )
+		for ( long i = 0 ; i < m_rows ; i++ )
 			delete [] m_matrix[i];
 
 		delete [] m_matrix;
@@ -89,11 +89,11 @@ Matrix<T>::~Matrix() {
 
 /*export*/ template <class T>
 void
-Matrix<T>::resize(int rows, int columns) {
+Matrix<T>::resize(long rows, long columns) {
 	if ( m_matrix == NULL ) {
 		// alloc arrays
 		m_matrix = new T*[rows]; // rows
-		for ( int i = 0 ; i < rows ; i++ )
+		for ( long i = 0 ; i < rows ; i++ )
 			m_matrix[i] = new T[columns]; // columns
 
 		m_rows = rows;
@@ -104,22 +104,22 @@ Matrix<T>::resize(int rows, int columns) {
 		T **new_matrix;
 		// alloc new arrays
 		new_matrix = new T*[rows]; // rows
-		for ( int i = 0 ; i < rows ; i++ ) {
+		for ( long i = 0 ; i < rows ; i++ ) {
 			new_matrix[i] = new T[columns]; // columns
-			for ( int j = 0 ; j < columns ; j++ )
+			for ( long j = 0 ; j < columns ; j++ )
 				new_matrix[i][j] = 0;
 		}
 
 		// copy data from saved pointer to new arrays
-		int minrows = std::min<int>(rows, m_rows);
-		int mincols = std::min<int>(columns, m_columns);
-		for ( int x = 0 ; x < minrows ; x++ )
-			for ( int y = 0 ; y < mincols ; y++ )
+		long minrows = std::min<long>(rows, m_rows);
+		long mincols = std::min<long>(columns, m_columns);
+		for ( long x = 0 ; x < minrows ; x++ )
+			for ( long y = 0 ; y < mincols ; y++ )
 				new_matrix[x][y] = m_matrix[x][y];
 
 		// delete old arrays
 		if ( m_matrix != NULL ) {
-			for ( int i = 0 ; i < m_rows ; i++ )
+			for ( long i = 0 ; i < m_rows ; i++ )
 				delete [] m_matrix[i];
 
 			delete [] m_matrix;
@@ -139,8 +139,8 @@ Matrix<T>::identity() {
 
 	clear();
 
-	int x = std::min<int>(m_rows, m_columns);
-	for ( int i = 0 ; i < x ; i++ )
+	long x = std::min<long>(m_rows, m_columns);
+	for ( long i = 0 ; i < x ; i++ )
 		m_matrix[i][i] = 1;
 }
 
@@ -149,8 +149,8 @@ void
 Matrix<T>::clear() {
 	assert( m_matrix != NULL );
 
-	for ( int i = 0 ; i < m_rows ; i++ )
-		for ( int j = 0 ; j < m_columns ; j++ )
+	for ( long i = 0 ; i < m_rows ; i++ )
+		for ( long j = 0 ; j < m_columns ; j++ )
 			m_matrix[i][j] = 0;
 }
 
@@ -161,8 +161,8 @@ Matrix<T>::trace() {
 
 	T value = 0;
 
-	int x = std::min<int>(m_rows, m_columns);
-	for ( int i = 0 ; i < x ; i++ )
+	long x = std::min<long>(m_rows, m_columns);
+	for ( long i = 0 ; i < x ; i++ )
 		value += m_matrix[i][i];
 
 	return value;
@@ -174,17 +174,17 @@ Matrix<T>::transpose() {
 	assert( m_rows > 0 );
 	assert( m_columns > 0 );
 
-	int new_rows = m_columns;
-	int new_columns = m_rows;
+	long new_rows = m_columns;
+	long new_columns = m_rows;
 
 	if ( m_rows != m_columns ) {
 		// expand matrix
-		int m = std::max<int>(m_rows, m_columns);
+		long m = std::max<long>(m_rows, m_columns);
 		resize(m,m);
 	}
 
-	for ( int i = 0 ; i < m_rows ; i++ ) {
-		for ( int j = i+1 ; j < m_columns ; j++ ) {
+	for ( long i = 0 ; i < m_rows ; i++ ) {
+		for ( long j = i+1 ; j < m_columns ; j++ ) {
 			T tmp = m_matrix[i][j];
 			m_matrix[i][j] = m_matrix[j][i];
 			m_matrix[j][i] = tmp;
@@ -208,9 +208,9 @@ Matrix<T>::product(Matrix<T> &other) {
 
 	Matrix<T> out(m_rows, other.m_columns);
 
-	for ( int i = 0 ; i < out.m_rows ; i++ ) {
-		for ( int j = 0 ; j < out.m_columns ; j++ ) {
-			for ( int x = 0 ; x < m_columns ; x++ ) {
+	for ( long i = 0 ; i < out.m_rows ; i++ ) {
+		for ( long j = 0 ; j < out.m_columns ; j++ ) {
+			for ( long x = 0 ; x < m_columns ; x++ ) {
 				out(i,j) += m_matrix[i][x] * other.m_matrix[x][j];
 			}
 		}
@@ -221,7 +221,7 @@ Matrix<T>::product(Matrix<T> &other) {
 
 /*export*/ template <class T>
 T&
-Matrix<T>::operator ()(int x, int y) {
+Matrix<T>::operator ()(long x, long y) {
 	assert ( x >= 0 );
 	assert ( y >= 0 );
 	assert ( x < m_rows );
