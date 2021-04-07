@@ -106,7 +106,7 @@ Convert files to use longs instead of ints
         #. N/A  : src/topology/dynamic-persistence.hpp
         #. DONE : src/topology/persistence-diagram.hpp
         #. DONE : src/topology/cohomology-persistence.h
-        #. src/topology/static-persistence.h
+        #. DONE : src/topology/static-persistence.h
         #. src/alphaComplex.h
         #. src/rips.h
         #. src/tdautils/typecastUtils.h

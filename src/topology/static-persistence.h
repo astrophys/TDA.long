@@ -140,7 +140,7 @@ class StaticPersistence
         // Acts as an archetype and if necessary a base class for visitors passed to <pair_simplices(bg, end, visitor)>.
         struct                          PairVisitor
         {
-                                        PairVisitor(unsigned size): show_progress(size, Rcpp::Rcout)         {}
+                                        PairVisitor(unsigned long size): show_progress(size, Rcpp::Rcout)         {}
             // Function: init(i)
             // Called after OrderElement pointed to by `i` has been initialized 
             // (its cycle is set to be its boundary, and pair is set to self, i.e. `i`)
