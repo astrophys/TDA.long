@@ -46,7 +46,7 @@ class OffsetOutputMap
         }
 
     private:
-        OffsetMap<typename Container::iterator, unsigned>           om;
+        OffsetMap<typename Container::iterator, unsigned long>           om;
         const Container&                                            order_;
 };
 
