@@ -3,17 +3,17 @@ Author : [Fasy et al. (2014)](https://projecteuclid.org/journals/annals-of-stati
 
 License: 
 
-    GUDHI: MIT + ['The GUDHI License'](https://gudhi.inria.fr/licensing/)
+  GUDHI: MIT + ['The GUDHI License'](https://gudhi.inria.fr/licensing/)
 
-    Dionysus: GPL-3
+  Dionysus: GPL-3
 
-    PHAT: GPL-3
+  PHAT: GPL-3
 
-    Boost/BH: ['Boost Software Licence'](https://www.boost.org/LICENSE_1_0.txt)
+  Boost/BH: ['Boost Software Licence'](https://www.boost.org/LICENSE_1_0.txt)
 
-    CGAL: GPL-3 | LGPL-3 + ['The CGAL Licence'](https://www.cgal.org/license.html)
+  CGAL: GPL-3 | LGPL-3 + ['The CGAL Licence'](https://www.cgal.org/license.html)
 
-    Ali's code : MIT
+  Ali's code : MIT
 
 ## Purpose:
 1. I am using this code to run very large biofilm samples (e.g. 512x512x46).
