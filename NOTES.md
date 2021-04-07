@@ -104,8 +104,8 @@ Convert files to use longs instead of ints
         #. DONE : src/topology/zigzag-persistence.h
         #. N/A  : src/topology/vineyard.h
         #. N/A  : src/topology/dynamic-persistence.hpp
-        #. src/topology/persistence-diagram.hpp
-        #. src/topology/cohomology-persistence.h
+        #. DONE : src/topology/persistence-diagram.hpp
+        #. DONE : src/topology/cohomology-persistence.h
         #. src/topology/static-persistence.h
         #. src/alphaComplex.h
         #. src/rips.h

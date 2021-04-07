@@ -90,12 +90,12 @@ struct CohomologyPersistence<BirthInfo_, SimplexData_, Field_>::SHead: public Si
 {
                     SHead(const SHead& other):
                         SimplexData(other), order(other.order)                  {}  // don't copy row since we can't
-                    SHead(const SimplexData& sd, unsigned o): 
+                    SHead(const SimplexData& sd, unsigned long o): 
                         SimplexData(sd), order(o)                               {}
 
     // intrusive list corresponding to row of s in Z^*, not ordered in any particular order
     ZRow            row;
-    unsigned        order;
+    unsigned long        order;
 };
 
 // An entry in a cocycle column; it's also an element in an intrusive list, hence the list_base_hook<>
@@ -121,7 +121,7 @@ struct CohomologyPersistence<BirthInfo_, SimplexData_, Field_>::SNode: public au
 template<class BirthInfo_, class SimplexData_, class Field_>
 struct CohomologyPersistence<BirthInfo_, SimplexData_, Field_>::Cocycle
 {
-                    Cocycle(const BirthInfo& b, unsigned o):
+                    Cocycle(const BirthInfo& b, unsigned long o):
                         birth(b), order(o)                                      {}
 
     ZColumn         zcolumn;
