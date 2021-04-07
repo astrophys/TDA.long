@@ -29,16 +29,16 @@
 template< typename RealMatrix, typename Print >
 void alphaComplexDiag(
   const RealMatrix  & X,             //points to some memory space
-  const unsigned      nSample,
-  const unsigned      nDim,
+  const unsigned long nSample,
+  const unsigned long nDim,
   const int           maxdimension,
   const std::string & libraryDiag,
   const bool          location,
   const bool          printProgress,
   const Print       & print,
   std::vector< std::vector< std::vector< double > > > & persDgm,
-  std::vector< std::vector< std::vector< unsigned > > > & persLoc,
-  std::vector< std::vector< std::vector< std::vector< unsigned > > > > & persCycle
+  std::vector< std::vector< std::vector< unsigned long > > > & persLoc,
+  std::vector< std::vector< std::vector< std::vector< unsigned long > > > > & persCycle
 ) {
 
   using Kernel = CGAL::Epick_d< CGAL::Dynamic_dimension_tag>;
