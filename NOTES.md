@@ -77,7 +77,7 @@ Convert files to use longs instead of ints
         #. DONE : src/utilities/circular_list.h
         #. DONE : src/utilities/containers.h
         #. DONE : src/utilities/consistencylist.hpp
-        #. src/utilities/indirect.h
+        #. DONE : src/utilities/indirect.h
         #. src/utilities/orderlist.h
         #. src/utilities/property-maps.h
         #. src/utilities/counter.h
