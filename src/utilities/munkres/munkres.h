@@ -28,22 +28,22 @@ class Munkres {
 public:
 	void solve(Matrix<double> &m);
 private:
-  static const int NORMAL = 0;
-  static const int STAR = 1;
-  static const int PRIME = 2; 
-	inline bool find_uncovered_in_matrix(double,int&,int&);
-	inline bool pair_in_list(const std::pair<int,int> &, const std::list<std::pair<int,int> > &);
-	int step1(void);
-	int step2(void);
-	int step3(void);
-	int step4(void);
-	int step5(void);
-	int step6(void);
-	Matrix<int> mask_matrix;
+  static const long NORMAL = 0;
+  static const long STAR = 1;
+  static const long PRIME = 2; 
+	inline bool find_uncovered_in_matrix(double,long&,long&);
+	inline bool pair_in_list(const std::pair<long,long> &, const std::list<std::pair<long,long> > &);
+	long step1(void);
+	long step2(void);
+	long step3(void);
+	long step4(void);
+	long step5(void);
+	long step6(void);
+	Matrix<long> mask_matrix;
 	Matrix<double> matrix;
 	bool *row_mask;
 	bool *col_mask;
-	int saverow, savecol;
+	long saverow, savecol;
 };
 
 // DM: This is dangerous, but will do for now
