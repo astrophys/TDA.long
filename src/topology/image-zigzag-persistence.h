@@ -36,8 +36,8 @@ class ImageZigzagPersistence: public ZigzagPersistence<BirthID_, SimplexSubcompl
 
                                 ImageZigzagPersistence():
                                     im_last(Parent::z_list.end()), cok_begin(Parent::z_list.end()),
-                                    im_order_begin(std::numeric_limits<int>::min()/2),
-                                    cok_order_begin(std::numeric_limits<int>::max()/2)
+                                    im_order_begin(std::numeric_limits<long>::min()/2),
+                                    cok_order_begin(std::numeric_limits<long>::max()/2)
                                 {}
 
         IndexDeathPair          add(ZColumn         bdry,
@@ -87,8 +87,8 @@ class ImageZigzagPersistence: public ZigzagPersistence<BirthID_, SimplexSubcompl
                 bool                subcomplex, birth_in_image;
         };
 
-        const int                   im_order_begin;
-        const int                   cok_order_begin;
+        const long                   im_order_begin;
+        const long                   cok_order_begin;
 
     private:
         using                   Parent::make_remover;

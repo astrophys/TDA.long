@@ -94,7 +94,7 @@ Convert files to use longs instead of ints
         #. DONE : src/topology/dynamic-persistence.h
         #. N/A  : src/topology/chain.h
         #. DONE : src/topology/filtration.h
-        #. src/topology/image-zigzag-persistence.h
+        #. DONE : src/topology/image-zigzag-persistence.h
         #. src/topology/cycles.h
         #. src/topology/weighted-rips.h
         #. src/topology/persistence-diagram.h
