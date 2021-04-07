@@ -50,9 +50,9 @@ class SizeStorage
         Self&           operator+=(size_t inc)                                              { size_ += inc; return *this; }
         Self&           operator-=(size_t dec)                                              { size_ -= dec; return *this; }
         Self&           operator++()                                                        { ++size_; return *this; }
-        Self            operator++(int)                                                     { Self tmp = *this; size_++; return tmp; }
+        Self            operator++(long)                                                     { Self tmp = *this; size_++; return tmp; }
         Self&           operator--()                                                        { --size_; return *this; }
-        Self            operator--(int)                                                     { Self tmp = *this; size_--; return tmp; }
+        Self            operator--(long)                                                     { Self tmp = *this; size_--; return tmp; }
         size_t          size(const Container& c) const                                      { return size_; }
         void            swap(SizeStorage& other)                                            { std::swap(size_, other.size_); }
 
@@ -80,7 +80,7 @@ struct CountingBackInserter: public std::back_insert_iterator<C>,
                                     ParentIterator(c)                           {}
 
     Self&                       operator++()                                    { ParentSize::operator++(); ParentIterator::operator++(); return *this; }
-    Self                        operator++(int i)                               { Self tmp = *this; ParentSize::operator++(i); ParentIterator::operator++(i); return tmp; }
+    Self                        operator++(long i)                               { Self tmp = *this; ParentSize::operator++(i); ParentIterator::operator++(i); return tmp; }
 };
 
 /**
@@ -194,9 +194,9 @@ class SizeStorage<vector<T> >
         Self&           operator+=(size_t)                                                  { return *this; }
         Self&           operator-=(size_t)                                                  { return *this; }
         Self&           operator++()                                                        { return *this; }
-        Self            operator++(int)                                                     { return *this; }
+        Self            operator++(long)                                                     { return *this; }
         Self&           operator--()                                                        { return *this; }
-        Self            operator--(int)                                                     { return *this; }
+        Self            operator--(long)                                                     { return *this; }
         size_t          size(const Container& c) const                                      { return c.size(); }
         void            swap(SizeStorage&)                                                  {}
 
@@ -216,9 +216,9 @@ class SizeStorage<deque<T> >
         Self&           operator+=(size_t)                                                  { return *this; }
         Self&           operator-=(size_t)                                                  { return *this; }
         Self&           operator++()                                                        { return *this; }
-        Self            operator++(int)                                                     { return *this; }
+        Self            operator++(long)                                                     { return *this; }
         Self&           operator--()                                                        { return *this; }
-        Self            operator--(int)                                                     { return *this; }
+        Self            operator--(long)                                                     { return *this; }
         size_t          size(const Container& c) const                                      { return c.size(); }
         void            swap(SizeStorage&)                                                  {}
 
