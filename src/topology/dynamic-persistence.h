@@ -156,7 +156,7 @@ class DynamicPersistenceTrails:
 
         struct PairingTrailsVisitor: public Parent::PairVisitor
         {
-                                        PairingTrailsVisitor(Order& order, ConsistencyComparison ccmp, unsigned size):
+                                        PairingTrailsVisitor(Order& order, ConsistencyComparison ccmp, unsigned long size):
                                             Parent::PairVisitor(size), order_(order), ccmp_(ccmp)   {}
 
             void                        init(iterator i) const                          { order_.modify(i,                                  boost::bind(&Element::template trail_append<ConsistencyComparison>, bl::_1, &*i, ccmp_));
@@ -314,7 +314,7 @@ class DynamicPersistenceChains:
 
         struct PairingChainsVisitor: public Parent::PairVisitor
         {
-                                        PairingChainsVisitor(Order& order, ConsistencyComparison ccmp, unsigned size):
+                                        PairingChainsVisitor(Order& order, ConsistencyComparison ccmp, unsigned long size):
                                             Parent::PairVisitor(size), order_(order), ccmp_(ccmp)       {}
 
             void                        init(iterator i) const                          { order_.modify(i,                  boost::bind(&Element::template chain_append<ConsistencyComparison>, bl::_1, &*i, ccmp_)); }                 // i->chain_append(&*i, ccmp)

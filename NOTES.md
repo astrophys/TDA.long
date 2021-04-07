@@ -91,7 +91,7 @@ Convert files to use longs instead of ints
         #. DONE : src/utilities/munkres/matrix.hpp
         #. DONE : src/grid.h
         #. DONE : src/topology/order.h
-        #. src/topology/dynamic-persistence.h
+        #. DONE : src/topology/dynamic-persistence.h
         #. src/topology/chain.h
         #. src/topology/filtration.h
         #. src/topology/image-zigzag-persistence.h
