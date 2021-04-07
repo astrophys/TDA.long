@@ -23,7 +23,7 @@
 
 
 
-typedef         unsigned                                            Vertex;
+typedef         unsigned long                                            Vertex;
 typedef         Simplex<Vertex, double>                             Smplx;
 typedef         Smplx::VertexContainer				    VertexCont;
 // typedef         std::vector<Vertex>                                 VertexVector;
@@ -41,7 +41,7 @@ typedef         OffsetBeginMap<Fltr, Persistence,
 
 // add a single edge to the filtration
 template< typename VectorList >
-void addEdge(int vert01, int vert02, VectorList & cmplx) {
+void addEdge(long vert01, long vert02, VectorList & cmplx) {
      typename VectorList::value_type vertices(2);
      vertices[0] = vert01;
      vertices[1] = vert02;
@@ -52,7 +52,7 @@ void addEdge(int vert01, int vert02, VectorList & cmplx) {
 
 // add a single triangle to the filtration
 template< typename VectorList >
-void addTri(int vert01, int vert02, int vert03, VectorList & cmplx) {
+void addTri(long vert01, long vert02, long vert03, VectorList & cmplx) {
      typename VectorList::value_type vertices(3);
      vertices[0] = vert01;
      vertices[1] = vert02;
@@ -64,7 +64,7 @@ void addTri(int vert01, int vert02, int vert03, VectorList & cmplx) {
 
 // add a single tet to the filtration
 template< typename VectorList >
-void addTet(int vert01, int vert02, int vert03, int vert04, VectorList & cmplx) {
+void addTet(long vert01, long vert02, long vert03, long vert04, VectorList & cmplx) {
      typename VectorList::value_type vertices(4);
      vertices[0] = vert01;
      vertices[1] = vert02;
@@ -77,9 +77,9 @@ void addTet(int vert01, int vert02, int vert03, int vert04, VectorList & cmplx) 
 
 template< typename VectorList >
 void addAllEdges(
-    const int ncols, const int nrows, int i, int j, int k,
+    const long ncols, const long nrows, long i, long j, long k,
     VectorList & cmplx) {     
-     int curidx = i + ncols*j + ncols*nrows*k;
+     long curidx = i + ncols*j + ncols*nrows*k;
 
      // ... add edge (i-1,j,k) <--> (i,j,k)
      if (i > 0)
@@ -145,11 +145,11 @@ void addAllEdges(
 
 template< typename VectorList >
 void addEvenTets(
-    const int ncols, const int nrows, int i, int j, int k,
+    const long ncols, const long nrows, long i, long j, long k,
     VectorList & cmplx) {
 
      assert(i > 0 && j > 0 && k > 0);
-     int curidx = i + ncols*j + ncols*nrows*k;
+     long curidx = i + ncols*j + ncols*nrows*k;
      
      // top vertex (i, j-1, k)
      addTet(curidx, curidx - 1 - ncols, curidx - ncols - nrows*ncols, curidx - ncols, cmplx);
@@ -170,16 +170,16 @@ void addEvenTets(
 
 template< typename VectorList >
 void addOddTets(
-    const int ncols, const int nrows, int i, int j, int k,
+    const long ncols, const long nrows, long i, long j, long k,
     VectorList & cmplx) {
      assert(i > 0 && j > 0 && k > 0);
-     int curidx = i + ncols*j + ncols*nrows*k;
+     long curidx = i + ncols*j + ncols*nrows*k;
       
      typename VectorList::value_type vertices(4);
      vertices[0] = curidx;  vertices[3] = curidx;
      vertices[1] = -1; vertices[2] = -1; 
     
-     int v1, v2, v3, v4;
+     long v1, v2, v3, v4;
      double value, value2;  // max of value and value 2 is the fcn value. 
 
      // top vertex (i, j, k)
@@ -218,10 +218,10 @@ void addOddTets(
 
 template< typename VectorList >
 void addAllTriangles(
-    const int ncols, const int nrows, int i, int j, int k,
+    const long ncols, const long nrows, long i, long j, long k,
     VectorList & cmplx) {
 
-     int curidx = i + ncols*j + ncols*nrows*k;
+     long curidx = i + ncols*j + ncols*nrows*k;
      
      // ... consider two cases for the cubical decomposition:
      if ((i+j+k)%2 == 0)
@@ -289,9 +289,9 @@ void addAllTriangles(
 
 template< typename VectorList >
 void addAllTetrahedra(
-    const int ncols, const int nrows, int i, int j, int k,
+    const long ncols, const long nrows, long i, long j, long k,
     VectorList & cmplx) {
-     int curidx = i + ncols*j + ncols*nrows*k;
+     long curidx = i + ncols*j + ncols*nrows*k;
      
      // ... consider two cases for the cubical decomposition:
      if ((i+j+k)%2 == 0)
@@ -323,16 +323,16 @@ void addAllTetrahedra(
 
 template< typename DimensionVector, typename VectorList >
 void simplicesFromGrid(
-    const DimensionVector & gridDim, const int embedDim, VectorList & cmplx) {
+    const DimensionVector & gridDim, const long embedDim, VectorList & cmplx) {
 
-	const unsigned gridProd = std::accumulate(
-			gridDim.begin(), gridDim.end(), 1, std::multiplies< int >());
-	int ncols, nrows;
+	const unsigned long gridProd = std::accumulate(
+			gridDim.begin(), gridDim.end(), 1, std::multiplies< long >());
+	long ncols, nrows;
 	ncols = nrows = 1;
-	int i = 0; // indexing the columns
-	int j = 0; // indexing the rows
-	int k = 0; // indexing the z dimension
-	unsigned int curidx = 0; // curidx = i + ncols * j + nrows * ncols * k
+	long i = 0; // indexing the columns
+	long j = 0; // indexing the rows
+	long k = 0; // indexing the z dimension
+	unsigned long curidx = 0; // curidx = i + ncols * j + nrows * ncols * k
 
 	if (gridDim.size() > 0) {
 		ncols = gridDim[0];
@@ -383,7 +383,7 @@ void simplicesFromGrid(
 
 
 template <typename IntVector>
-inline std::vector< unsigned char > isInternal(unsigned int argIdx, const IntVector& gridDim) {
+inline std::vector< unsigned char > isInternal(unsigned long argIdx, const IntVector& gridDim) {
     std::vector< unsigned char > resIsInt;
     resIsInt.reserve(gridDim.size());
     typename IntVector::const_iterator itrDim;
@@ -399,16 +399,16 @@ inline std::vector< unsigned char > isInternal(unsigned int argIdx, const IntVec
 
 inline std::vector< std::vector< unsigned char > > verticesLessVertex(const std::vector< unsigned char > & argVtx, const bool argAlsoEqual) {
 	std::vector< std::vector< unsigned char > > resCubeVertices;
-    unsigned int idxVtx, vtxNum;
-    std::vector< unsigned int > oneTwoVec;
+    unsigned long idxVtx, vtxNum;
+    std::vector< unsigned long > oneTwoVec;
 	oneTwoVec.reserve(argVtx.size());
 	std::vector< unsigned char >::const_iterator itrVtx;
 	for (itrVtx = argVtx.begin(); itrVtx != argVtx.end(); ++itrVtx)
 	{
-		oneTwoVec.push_back(1+(unsigned int)(*itrVtx));
+		oneTwoVec.push_back(1+(unsigned long)(*itrVtx));
 	}
 	
-    vtxNum = std::accumulate(oneTwoVec.begin(), oneTwoVec.end(), 1, std::multiplies< unsigned int >());
+    vtxNum = std::accumulate(oneTwoVec.begin(), oneTwoVec.end(), 1, std::multiplies< unsigned long >());
 	if (!argAlsoEqual)
 	{
 		vtxNum -= 1;
@@ -423,7 +423,7 @@ inline std::vector< std::vector< unsigned char > > verticesLessVertex(const std:
 
 
 
-std::vector< std::map< std::vector< unsigned char >, std::vector< std::vector< std::vector< unsigned char > > > > > triangulateHypercube(const int argDimEmbed, const unsigned char embedDim) {
+std::vector< std::map< std::vector< unsigned char >, std::vector< std::vector< std::vector< unsigned char > > > > > triangulateHypercube(const long argDimEmbed, const unsigned char embedDim) {
     std::vector< std::map< std::vector< unsigned char >, std::vector< std::vector< std::vector< unsigned char > > > > > resTriedCube;
     resTriedCube.reserve(embedDim+1);
 
@@ -482,7 +482,7 @@ std::vector< std::map< std::vector< unsigned char >, std::vector< std::vector< s
 
 template< typename DimensionVector, typename VectorList >
 void addSimplices(
-    const int argIdxCur, const DimensionVector & gridDim, const unsigned char argIdxDim,
+    const long argIdxCur, const DimensionVector & gridDim, const unsigned char argIdxDim,
     std::vector< std::map< std::vector< unsigned char >, std::vector< std::vector< std::vector< unsigned char > > > > > & argTriedCube,
     VectorList & cmplx) {
     std::vector< unsigned char > isInt = isInternal(argIdxCur, gridDim);
@@ -490,8 +490,8 @@ void addSimplices(
     std::vector< std::vector< std::vector< unsigned char > > >::const_iterator itrDirSmpxVec;
     std::vector< std::vector< unsigned char > >::const_iterator itrDirVtxVec;
 	std::vector< unsigned char > diffVtx(gridDim.size());
-	std::vector< unsigned int > gridAccNum(gridDim.size(),1);
-	std::partial_sum(gridDim.begin(), gridDim.end()-1, gridAccNum.begin()+1, std::multiplies< unsigned int >());
+	std::vector< unsigned long > gridAccNum(gridDim.size(),1);
+	std::partial_sum(gridDim.begin(), gridDim.end()-1, gridAccNum.begin()+1, std::multiplies< unsigned long >());
 
     typename VectorList::value_type vtxVec(argIdxDim + 1);
     typename VectorList::value_type::iterator itrVtxVec;
@@ -516,9 +516,9 @@ void simplicesFromGridBarycenter(
     const DimensionVector & gridDim, const unsigned char embedDim,
     VectorList & cmplx) {
 
-	const unsigned gridProd = std::accumulate(
-			gridDim.begin(), gridDim.end(), 1, std::multiplies< int >());
-	unsigned int idxCur; unsigned char idxDim;
+	const unsigned long gridProd = std::accumulate(
+			gridDim.begin(), gridDim.end(), 1, std::multiplies< long >());
+	unsigned long idxCur; unsigned char idxDim;
 
    std::vector< std::map< std::vector< unsigned char >, std::vector< std::vector< std::vector< unsigned char > > > > >  triedCube = triangulateHypercube(gridDim.size(), embedDim);
   

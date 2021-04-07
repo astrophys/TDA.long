@@ -110,7 +110,7 @@ Convert files to use longs instead of ints
         #. DONE : src/alphaComplex.h
         #. DONE : src/rips.h
         #. DONE : src/tdautils/typecastUtils.h
-        #. src/tdautils/gridUtils.h
+        #. DONE : src/tdautils/gridUtils.h
         #. src/tdautils/filtrationDiag.h
         #. src/tdautils/dionysusUtils.h
         #. src/tdautils/kernelUtils.h
