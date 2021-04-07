@@ -10,11 +10,11 @@ typedef		short int		        Dimension;
 const 		Sign	 				POS = true;
 const 		Sign					NEG = false;
 typedef		double					RealType;
-typedef		unsigned int			SizeType;
+typedef		unsigned long			SizeType;
 
 static RealType Infinity = std::numeric_limits<RealType>::infinity();
 
-typedef 	const unsigned int&		version_type;
+typedef 	const unsigned long&		version_type;
 
 // Empty is made a template so that we don't have to compile and deal with a library
 // solely for its operator<<(out, e) function
@@ -54,7 +54,7 @@ namespace boost {
 namespace serialization {
 
 template<class Archive, class T>
-void serialize(Archive & ar, Empty<T>&, const unsigned int )
+void serialize(Archive & ar, Empty<T>&, const unsigned long )
 {}
 
 } // namespace serialization

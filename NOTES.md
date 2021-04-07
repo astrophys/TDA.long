@@ -81,7 +81,7 @@ Convert files to use longs instead of ints
         #. DONE : src/utilities/orderlist.h
         #. N/A  : src/utilities/property-maps.h
         #. DONE : src/utilities/counter.h
-        #. src/utilities/eventqueue.h
+        #. N/A  : src/utilities/eventqueue.h
         #. src/utilities/types.h
         #. src/utilities/binaryheap.h
         #. src/utilities/consistencylist.h
