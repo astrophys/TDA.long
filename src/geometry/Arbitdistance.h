@@ -25,7 +25,7 @@ struct ArbitDistance:
     {
         AssertMsg(p1.size() == p2.size(), "Points must be in the same dimension (in Arbitrary Distance): dim1=%d, dim2=%d", p1.size(), p2.size());
         result_type sum = 0;
-		int index_p2 = (int) p2[0];
+		long index_p2 = (long) p2[0];
 		sum = p1[index_p2];
 		return sum;
         //for (size_t i = 0; i < p1.size(); ++i)
@@ -39,7 +39,7 @@ void    read_points2(const std::string& infilename, PointContainer& points)
 {
     std::ifstream in(infilename.c_str());
     std::string   line;
-	int index = 1;
+	long index = 1;
     while(std::getline(in, line))
     {
         if (line[0] == '#') continue;               // comment line in the file
