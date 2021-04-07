@@ -58,7 +58,7 @@
 Rcpp::List GridFiltration(
     const Rcpp::NumericVector & FUNvalues,
     const Rcpp::IntegerVector & gridDim,
-    const int                   maxdimension,
+    const long                   maxdimension,
     const std::string         & decomposition,
     const bool                  printProgress
 ) {
@@ -70,7 +70,7 @@ Rcpp::List GridFiltration(
   //stdoutLog.subscribeTo(RLOG_CHANNEL("topology/vineyard"));
 #endif
 
-  std::vector< std::vector< unsigned > > cmplx;
+  std::vector< std::vector< unsigned long > > cmplx;
   std::vector< double > values;
 
   gridFiltration(
@@ -106,7 +106,7 @@ Rcpp::List GridFiltration(
 Rcpp::List GridDiag(
     const Rcpp::NumericVector & FUNvalues,
     const Rcpp::IntegerVector & gridDim,
-    const int                   maxdimension,
+    const long                   maxdimension,
     const std::string         & decomposition,
     const std::string         & library,
     const bool                  location,
@@ -121,10 +121,10 @@ Rcpp::List GridDiag(
 #endif
 
   std::vector< std::vector< std::vector< double > > > persDgm;
-	std::vector< std::vector< std::vector< unsigned > > > persLoc;
-	std::vector< std::vector< std::vector< std::vector< unsigned > > > > persCycle;
+	std::vector< std::vector< std::vector< unsigned long > > > persLoc;
+	std::vector< std::vector< std::vector< std::vector< unsigned long > > > > persCycle;
 
-  gridDiag< std::vector< unsigned > >(
+  gridDiag< std::vector< unsigned long > >(
       FUNvalues, gridDim, maxdimension, decomposition, library, location,
       printProgress, Rprintf, persDgm, persLoc, persCycle);
 
@@ -152,7 +152,7 @@ Bottleneck(const Rcpp::NumericMatrix & Diag1
 double
 Wasserstein(const Rcpp::NumericMatrix & Diag1
           , const Rcpp::NumericMatrix & Diag2
-          , const int                   p
+          , const long                   p
 	) {
 	return wasserstein_distance(RcppToDionysus< PersistenceDiagram<> >(Diag1),
 			RcppToDionysus< PersistenceDiagram<> >(Diag2), p);
@@ -241,7 +241,7 @@ DtmWeight(const Rcpp::NumericMatrix & knnDistance
 // [[Rcpp::export]]
 Rcpp::List FiltrationDiag(
     const Rcpp::List  & filtration,
-    const int           maxdimension,
+    const long           maxdimension,
     const std::string & library,
     const bool          location,
     const bool          printProgress
@@ -250,8 +250,8 @@ Rcpp::List FiltrationDiag(
   Rcpp::List cmplx(filtration[0]);
   Rcpp::NumericVector values(filtration[1]);
   std::vector< std::vector< std::vector< double > > > persDgm;
-  std::vector< std::vector< std::vector< unsigned > > > persLoc;
-  std::vector< std::vector< std::vector< std::vector< unsigned > > > >
+  std::vector< std::vector< std::vector< unsigned long > > > persLoc;
+  std::vector< std::vector< std::vector< std::vector< unsigned long > > > >
       persCycle;
 
   filtrationDiag< Rcpp::IntegerVector >(
@@ -281,8 +281,8 @@ Rcpp::List FunFiltration(
     const Rcpp::List          & cmplx
 ) {
 
-  std::vector< std::vector< unsigned > > funCmplx =
-      RcppCmplxToStl< std::vector< unsigned >, Rcpp::IntegerVector >(cmplx, 1);
+  std::vector< std::vector< unsigned long > > funCmplx =
+      RcppCmplxToStl< std::vector< unsigned long >, Rcpp::IntegerVector >(cmplx, 1);
   std::vector< double > values;
 
   funFiltration(FUNvalues, funCmplx, values);
@@ -315,7 +315,7 @@ Rcpp::List FunFiltration(
 // [[Rcpp::export]]
 Rcpp::List RipsFiltration(
     const Rcpp::NumericMatrix & X,
-    const int                   maxdimension,
+    const long                   maxdimension,
     const double                maxscale,
     const std::string         & dist,
     const std::string         & library,
@@ -359,7 +359,7 @@ Rcpp::List RipsFiltration(
 // [[Rcpp::export]]
 Rcpp::List
 RipsDiag(const Rcpp::NumericMatrix & X
-       , const int                   maxdimension
+       , const long                   maxdimension
        , const double                maxscale
        , const std::string         & dist
        , const std::string         & libraryFiltration
@@ -369,8 +369,8 @@ RipsDiag(const Rcpp::NumericMatrix & X
 ) {
 
 	std::vector< std::vector< std::vector< double > > > persDgm;
-	std::vector< std::vector< std::vector< unsigned > > > persLoc;
-	std::vector< std::vector< std::vector< std::vector< unsigned > > > > persCycle;
+	std::vector< std::vector< std::vector< unsigned long > > > persLoc;
+	std::vector< std::vector< std::vector< std::vector< unsigned long > > > > persCycle;
 
   ripsDiag(
       X, X.nrow(), X.ncol(), maxdimension, maxscale, dist, libraryFiltration,
@@ -434,15 +434,15 @@ Rcpp::List AlphaShapeFiltration(
 // [[Rcpp::export]]
 Rcpp::List AlphaShapeDiag(
     const Rcpp::NumericMatrix & X,             //points to some memory space
-    const int                   maxdimension,
+    const long                   maxdimension,
     const std::string         & libraryDiag,
     const bool                  location,
     const bool                  printProgress
 	) {
 
   std::vector< std::vector< std::vector< double > > > persDgm;
-  std::vector< std::vector< std::vector< unsigned > > > persLoc;
-  std::vector< std::vector< std::vector< std::vector< unsigned > > > >
+  std::vector< std::vector< std::vector< unsigned long > > > persLoc;
+  std::vector< std::vector< std::vector< std::vector< unsigned long > > > >
       persCycle;
   Rcpp::NumericMatrix coordinates;
 
@@ -507,15 +507,15 @@ Rcpp::List AlphaComplexFiltration(
 // [[Rcpp::export]]
 Rcpp::List AlphaComplexDiag(
     const Rcpp::NumericMatrix & X,             //points to some memory space
-    const int                   maxdimension,
+    const long                  maxdimension,
     const std::string         & libraryDiag,
     const bool                  location,
     const bool                  printProgress
 	) {
 
   std::vector< std::vector< std::vector< double > > > persDgm;
-  std::vector< std::vector< std::vector< unsigned > > > persLoc;
-  std::vector< std::vector< std::vector< std::vector< unsigned > > > >
+  std::vector< std::vector< std::vector< unsigned long > > > persLoc;
+  std::vector< std::vector< std::vector< std::vector< unsigned long > > > >
       persCycle;
 
   alphaComplexDiag(
