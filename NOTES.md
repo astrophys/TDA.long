@@ -82,9 +82,9 @@ Convert files to use longs instead of ints
         #. N/A  : src/utilities/property-maps.h
         #. DONE : src/utilities/counter.h
         #. N/A  : src/utilities/eventqueue.h
-        #. src/utilities/types.h
-        #. src/utilities/binaryheap.h
-        #. src/utilities/consistencylist.h
+        #. DONE : src/utilities/types.h
+        #. N/A  : src/utilities/binaryheap.h
+        #. DONE : src/utilities/consistencylist.h
         #. src/utilities/munkres/munkres.h
         #. src/utilities/munkres/matrix.h
         #. src/utilities/munkres/munkres.cpp

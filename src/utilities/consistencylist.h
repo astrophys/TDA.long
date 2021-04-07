@@ -85,7 +85,7 @@ class ConsistencyList: public OrderList<ConsistencyListNode<T> >
 		/// @}
 
 	private:
-		unsigned int	sz;
+		unsigned long	sz;
 };
 
 /// Basic comparison that LessThan and GreaterThan derive from
@@ -95,7 +95,7 @@ class ConsistencyList<T>::OrderComparison
 	public:
 		typedef			typename ConsistencyList<T>::const_iterator		ComparableType;
 
-		int 			compare(ComparableType a, ComparableType b) const;				/// (-1,0,1) = a (precedes, ==, succeeds) b
+		long 			compare(ComparableType a, ComparableType b) const;				/// (-1,0,1) = a (precedes, ==, succeeds) b
 };
 
 /// Determines if the first element is less than the second one
@@ -106,7 +106,7 @@ class ConsistencyList<T>::LessThanComparison: public OrderComparison
 		typedef			OrderComparison								Parent;
 		typedef			typename Parent::ComparableType				ComparableType;
 
-		int 			compare(ComparableType a, ComparableType b) const;
+		long 			compare(ComparableType a, ComparableType b) const;
 		bool 			operator()(ComparableType a, ComparableType b) const;
 };
 
@@ -118,7 +118,7 @@ class ConsistencyList<T>::GreaterThanComparison: public OrderComparison
 		typedef			OrderComparison								Parent;
 		typedef			typename Parent::ComparableType				ComparableType;
 
-		int 			compare(ComparableType a, ComparableType b) const;
+		long 			compare(ComparableType a, ComparableType b) const;
 		bool 			operator()(ComparableType a, ComparableType b) const;
 };
 
@@ -129,7 +129,7 @@ class ConsistencyList<T>::ConsistencyComparison
 	public:
 		typedef			typename ConsistencyList<T>::const_iterator		ComparableType;
 
-		int 			compare(ComparableType a, ComparableType b) const;				///< (-1,0,1) = a (precedes, ==, succeeds) b
+		long 			compare(ComparableType a, ComparableType b) const;				///< (-1,0,1) = a (precedes, ==, succeeds) b
 		bool 			operator()(ComparableType a, ComparableType b) const;
 };
 
@@ -137,7 +137,7 @@ class ConsistencyList<T>::ConsistencyComparison
 template<class T>
 struct ConsistencyListNode
 {
-	ConsistencyListNode(const T& d, unsigned int c):
+	ConsistencyListNode(const T& d, unsigned long c):
 		data(d), consistency(c)
 	{}
 
