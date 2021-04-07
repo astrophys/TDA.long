@@ -51,4 +51,4 @@ S3method(summary, maxPersistence)
 S3method(print, summary.diagram)
 S3method(print, summary.maxPersistence)
 
-useDynLib(TDA, .registration = TRUE)
+useDynLib(TDA.long, .registration = TRUE)

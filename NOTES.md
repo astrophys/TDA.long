@@ -29,4 +29,7 @@ header-includes:
 \tableofcontents
 \pagebreak
 
-
+To Edit Repo Name
+==================================
+1. Change TDA -> TDA.long in NAMESPACE and DESCRIPTION
+#. Run Rcpp::compileAttributes()
