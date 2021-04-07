@@ -29,7 +29,7 @@ add(const Function& f, const Event_& e)
 {
     Event* ee = new Event_(e);
     rLog(rlSimulator, "Solving: %s", tostring(f).c_str());
-    int sign = FunctionKernel::sign_at_negative_infinity(f);        // going to be sign after current time
+    long sign = FunctionKernel::sign_at_negative_infinity(f);        // going to be sign after current time
     rLog(rlSimulator, "Sign at -infinity: %i", sign);
     if (sign != 0)
     {
