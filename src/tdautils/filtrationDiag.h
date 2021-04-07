@@ -44,18 +44,18 @@ template< typename VertexVector, typename VectorList, typename RealVector >
 inline void filtrationDiagSorted(
     VectorList        & cmplx,
     RealVector        & values,
-    const int           maxdimension,
+    const long           maxdimension,
     const std::string & library,
     const bool          location,
     const bool          printProgress,
-    const unsigned      idxShift,
+    const unsigned long      idxShift,
     std::vector< std::vector< std::vector< double > > > & persDgm,
-    std::vector< std::vector< std::vector< unsigned > > > & persLoc,
-    std::vector< std::vector< std::vector< std::vector< unsigned > > > > & persCycle
+    std::vector< std::vector< std::vector< unsigned long > > > & persLoc,
+    std::vector< std::vector< std::vector< std::vector< unsigned long > > > > & persCycle
 ) {
 
   if (library[0] == 'G') {
-    int coeff_field_characteristic = 2;
+    long coeff_field_characteristic = 2;
     double min_persistence = 0.0;
     Gudhi::Simplex_tree<> smplxTree = filtrationTdaToGudhi<
         VertexVector, Gudhi::Simplex_tree<> >(
@@ -110,14 +110,14 @@ template< typename VertexVector, typename VectorList, typename RealVector >
 inline void filtrationDiag(
     VectorList        & cmplx,
     RealVector        & values,
-    const int           maxdimension,
+    const long           maxdimension,
     const std::string & library,
     const bool          location,
     const bool          printProgress,
-    const unsigned      idxShift,
+    const unsigned long      idxShift,
     std::vector< std::vector< std::vector< double > > > & persDgm,
-    std::vector< std::vector< std::vector< unsigned > > > & persLoc,
-    std::vector< std::vector< std::vector< std::vector< unsigned > > > > & persCycle
+    std::vector< std::vector< std::vector< unsigned long > > > & persLoc,
+    std::vector< std::vector< std::vector< std::vector< unsigned long > > > > & persCycle
 ) {
 
   if (std::is_sorted(values.begin(), values.end())) {
@@ -126,11 +126,11 @@ inline void filtrationDiag(
         idxShift, persDgm, persLoc, persCycle);
   }
   else {
-    std::vector< std::vector< unsigned > > cmplxTemp = 
-        RcppCmplxToStl< std::vector< unsigned >, VertexVector >(cmplx, 0);
+    std::vector< std::vector< unsigned long > > cmplxTemp = 
+        RcppCmplxToStl< std::vector< unsigned long >, VertexVector >(cmplx, 0);
     std::vector< double > valuesTemp(values.begin(), values.end());
     filtrationSort(cmplxTemp, valuesTemp);
-    filtrationDiagSorted< std::vector< unsigned > >(
+    filtrationDiagSorted< std::vector< unsigned long > >(
         cmplxTemp, valuesTemp, maxdimension, library, location, printProgress,
         idxShift, persDgm, persLoc, persCycle);
   }
