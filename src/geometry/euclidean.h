@@ -22,7 +22,7 @@ template<class NumberType_ = double>
 class Kernel
 {
 	public:
-		typedef 					unsigned int								DimensionType;
+		typedef 					unsigned long								DimensionType;
 		typedef						NumberType_									NumberType;
 		typedef						LinearAlgebra<NumberType>					LinearAlgebraK;
 		typedef						typename LinearAlgebraK::MatrixType			MatrixType;
