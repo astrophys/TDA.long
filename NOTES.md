@@ -109,7 +109,7 @@ Convert files to use longs instead of ints
         #. DONE : src/topology/static-persistence.h
         #. DONE : src/alphaComplex.h
         #. DONE : src/rips.h
-        #. src/tdautils/typecastUtils.h
+        #. DONE : src/tdautils/typecastUtils.h
         #. src/tdautils/gridUtils.h
         #. src/tdautils/filtrationDiag.h
         #. src/tdautils/dionysusUtils.h
