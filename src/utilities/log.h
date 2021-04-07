@@ -43,11 +43,11 @@ namespace rlog
 	class StdioNode
 	{
 		public:
-								StdioNode(int,int)					{}
+								StdioNode(long,long)					{}
 			void				subscribeTo(RLogChannel*)			{}
 
-			static const int 	OutputColor = 0;
-			static const int	OutputChannel = 0;
+			static const long 	OutputColor = 0;
+			static const long	OutputChannel = 0;
 	};
 }
 
