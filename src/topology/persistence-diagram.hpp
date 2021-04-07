@@ -143,11 +143,11 @@ serialize(Archive& ar, version_type )
 #include <boost/graph/adjacency_list.hpp>
 #include <boost/graph/max_cardinality_matching.hpp>
 
-struct Edge: public std::pair<unsigned, unsigned>
+struct Edge: public std::pair<unsigned long, unsigned long>
 {
-    typedef         std::pair<unsigned, unsigned>                       Parent;
+    typedef         std::pair<unsigned long, unsigned long>                       Parent;
 
-                    Edge(unsigned v1, unsigned v2, RealType d):
+                    Edge(unsigned long v1, unsigned long v2, RealType d):
                         Parent(v1, v2), distance(d)                     {}
 
     bool            operator<(const Edge& other) const                  { return distance < other.distance; }
@@ -162,7 +162,7 @@ struct CardinaliyComparison
     typedef         boost::adjacency_list<boost::vecS, boost::vecS, boost::undirectedS>         Graph;
     typedef         std::vector<boost::graph_traits<Graph>::vertex_descriptor>                  MatchingVector;
 
-                    CardinaliyComparison(unsigned size, EV_const_iterator begin):
+                    CardinaliyComparison(unsigned long size, EV_const_iterator begin):
                         max_size(size), bg(begin), last(bg), g(2*max_size), mates(2*max_size)
                     { boost::add_edge(bg->first, bg->second, g); }
 
@@ -190,7 +190,7 @@ struct CardinaliyComparison
         return matching_size(g, &mates[0]) == max_size;
     }
 
-    unsigned                max_size;
+    unsigned long                max_size;
     EV_const_iterator       bg;
     EV_const_iterator       last;
     Graph                   g;
@@ -204,21 +204,21 @@ RealType                bottleneck_distance(const Diagram1& dgm1, const Diagram2
     typedef         typename Diagram1::const_iterator                   Citer1;
     typedef         typename Diagram2::const_iterator                   Citer2;
 
-    const unsigned  max_size = dgm1.size() + dgm2.size();
+    const unsigned long  max_size = dgm1.size() + dgm2.size();
 
     // Compute all the edges and sort them by distance
     EdgeVector   edges;
 
     // Connect all diagonal points to each other
-    for (unsigned i = dgm1.size(); i < max_size; ++i)
-        for (unsigned j = max_size + dgm2.size(); j < 2*max_size; ++j)
+    for (unsigned long i = dgm1.size(); i < max_size; ++i)
+        for (unsigned long j = max_size + dgm2.size(); j < 2*max_size; ++j)
             edges.push_back(Edge(i, j, 0));
 
     // Edges between real points
-    unsigned i = 0;
+    unsigned long i = 0;
     for (Citer1 cur1 = dgm1.begin(); cur1 != dgm1.end(); ++cur1)
     {
-        unsigned j = max_size;
+        unsigned long j = max_size;
         for (Citer2 cur2 = dgm2.begin(); cur2 != dgm2.end(); ++cur2)
             edges.push_back(Edge(i,j++, norm(*cur1, *cur2)));
 
@@ -251,19 +251,19 @@ RealType                bottleneck_distance(const Diagram1& dgm1, const Diagram2
 // Wasserstein distance
 template<class Diagram>
 RealType
-wasserstein_distance(const Diagram& dgm1, const Diagram& dgm2, int p)
+wasserstein_distance(const Diagram& dgm1, const Diagram& dgm2, long p)
 {
     typedef         RealType                    Distance;
     typedef         typename Diagram::Point     Point;
     typedef         Linfty<Point, Point>        Norm;
 
-    unsigned size = dgm1.size() + dgm2.size();
+    unsigned long size = dgm1.size() + dgm2.size();
     Norm norm;
 
     // Setup the matrix
     Matrix<Distance>        m(size,size);
-    for (unsigned i = 0; i < dgm1.size(); ++i)
-        for (unsigned j = 0; j < dgm2.size(); ++j)
+    for (unsigned long i = 0; i < dgm1.size(); ++i)
+        for (unsigned long j = 0; j < dgm2.size(); ++j)
         {
             const Point& p1 = *(dgm1.begin() + i);
             const Point& p2 = *(dgm2.begin() + j);
@@ -271,15 +271,15 @@ wasserstein_distance(const Diagram& dgm1, const Diagram& dgm2, int p)
             m(j + dgm1.size(), i + dgm2.size()) = 0;
         }
 
-    for (unsigned i = 0; i < dgm1.size(); ++i)
-        for (unsigned j = dgm2.size(); j < size; ++j)
+    for (unsigned long i = 0; i < dgm1.size(); ++i)
+        for (unsigned long j = dgm2.size(); j < size; ++j)
         {
             const Point& p1 = *(dgm1.begin() + i);
             m(i,j) = pow(norm.diagonal(p1), p);
         }
 
-    for (unsigned j = 0; j < dgm2.size(); ++j)
-        for (unsigned i = dgm1.size(); i < size; ++i)
+    for (unsigned long j = 0; j < dgm2.size(); ++j)
+        for (unsigned long i = dgm1.size(); i < size; ++i)
         {
             const Point& p2 = *(dgm2.begin() + j);
             m(i,j) = pow(norm.diagonal(p2), p);
@@ -291,8 +291,8 @@ wasserstein_distance(const Diagram& dgm1, const Diagram& dgm2, int p)
 
     // Assume everything is assigned (i.e., that we have a perfect matching)
     Distance sum = 0;
-    for (unsigned i = 0; i < size; i++)
-        for (unsigned j = 0; j < size; j++)
+    for (unsigned long i = 0; i < size; i++)
+        for (unsigned long j = 0; j < size; j++)
             if (m(i,j) == 0)
             {
                 //std::cout << i << ": " << j << '\n';

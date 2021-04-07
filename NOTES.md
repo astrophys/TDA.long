@@ -101,9 +101,9 @@ Convert files to use longs instead of ints
         #. DONE : src/topology/field-arithmetic.h
         #. N/A  : src/topology/simplex.h
         #. N/A  : src/topology/chain.hpp
-        #. src/topology/zigzag-persistence.h
-        #. src/topology/vineyard.h
-        #. src/topology/dynamic-persistence.hpp
+        #. DONE : src/topology/zigzag-persistence.h
+        #. N/A  : src/topology/vineyard.h
+        #. N/A  : src/topology/dynamic-persistence.hpp
         #. src/topology/persistence-diagram.hpp
         #. src/topology/cohomology-persistence.h
         #. src/topology/static-persistence.h
