@@ -23,31 +23,31 @@ template <class T>
 class Matrix {
 public:
 	Matrix();
-	Matrix(int rows, int columns);
+	Matrix(long rows, long columns);
 	Matrix(const Matrix<T> &other);
 	Matrix<T> & operator= (const Matrix<T> &other);
 	~Matrix();
 	// all operations except product modify the matrix in-place.
-	void resize(int rows, int columns);
+	void resize(long rows, long columns);
 	void identity(void);
 	void clear(void);
-	T& operator () (int x, int y);
+	T& operator () (long x, long y);
 	T trace(void);
 	Matrix<T>& transpose(void);
 	Matrix<T> product(Matrix<T> &other);
-	int minsize(void) {
+	long minsize(void) {
 		return ((m_rows < m_columns) ? m_rows : m_columns);
 	}
-	int columns(void) {
+	long columns(void) {
 		return m_columns;
 	}
-	int rows(void) {
+	long rows(void) {
 		return m_rows;
 	}
 private:
 	T **m_matrix;
-	int m_rows;
-	int m_columns;
+	long m_rows;
+	long m_columns;
 };
 
 #include "matrix.hpp"

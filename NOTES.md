@@ -86,7 +86,7 @@ Convert files to use longs instead of ints
         #. N/A  : src/utilities/binaryheap.h
         #. DONE : src/utilities/consistencylist.h
         #. DONE : src/utilities/munkres/munkres.h
-        #. src/utilities/munkres/matrix.h
+        #. DONE : src/utilities/munkres/matrix.h
         #. src/utilities/munkres/munkres.cpp
         #. src/utilities/munkres/matrix.hpp
         #. src/grid.h
