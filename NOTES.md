@@ -98,7 +98,7 @@ Convert files to use longs instead of ints
         #. DONE : src/topology/cycles.h
         #. N/A  : src/topology/weighted-rips.h
         #. DONE : src/topology/persistence-diagram.h
-        #. src/topology/field-arithmetic.h
+        #. DONE : src/topology/field-arithmetic.h
         #. src/topology/simplex.h
         #. src/topology/chain.hpp
         #. src/topology/zigzag-persistence.h

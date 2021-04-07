@@ -6,13 +6,13 @@
 class ZpField
 {
     public:
-        typedef     int                                             Element;
+        typedef     long                                             Element;
 
                     ZpField(Element p = 2);
 
         Element     id()  const                                     { return 1; }
         Element     zero()  const                                   { return 0; }
-        Element     init(int a) const                               { return (a % p_ + p_) % p_; }
+        Element     init(long a) const                               { return (a % p_ + p_) % p_; }
 
         Element     neg(Element a) const                            { return p_ - a; }
         Element     add(Element a, Element b) const                 { return (a+b) % p_; }
