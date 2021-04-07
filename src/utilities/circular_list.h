@@ -62,7 +62,7 @@ public:
 		typedef T value_type;
 		typedef T& reference;
 		typedef T* pointer;
-		typedef int difference_type;
+		typedef long difference_type;
 		typedef std::forward_iterator_tag iterator_category;
 
 		inline iterator(Node* x=0):m_rep(x){}
@@ -76,7 +76,7 @@ public:
 		{ 
 			m_rep = m_rep->m_next; return *this; 
 		}
-		inline iterator operator++(int)
+		inline iterator operator++(long)
 		{ 
 			iterator tmp(*this); m_rep = m_rep->m_next; return tmp; 
 		}
@@ -103,7 +103,7 @@ public:
 		typedef T value_type;
 		typedef T& reference;
 		typedef T* pointer;
-		typedef int difference_type;
+		typedef long difference_type;
 		typedef std::forward_iterator_tag iterator_category;
 		inline const_iterator(const Node* x=0):m_rep(x){}
 		inline const_iterator(const const_iterator& x):m_rep(x.m_rep) {}
@@ -120,7 +120,7 @@ public:
 		{ 
 			m_rep = m_rep->m_next; return *this; 
 		}
-		inline const_iterator operator++(int)
+		inline const_iterator operator++(long)
 		{ 
 			const_iterator tmp(*this); m_rep = m_rep->m_next; return tmp; 
 		}
