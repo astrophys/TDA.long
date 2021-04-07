@@ -30,9 +30,9 @@ class UPolynomial
 
 		static void					solve(const RationalFunctionP& rf, RootStack& stack);
 		static RootType				root(const T& r)									{ return SynapsTraits<T>::root(r); }
-		static int					sign_at(const RationalFunctionP& rf, const RootType& r);
+		static long					sign_at(const RationalFunctionP& rf, const RootType& r);
 		static RootType				between(const RootType& r1, const RootType& r2)		{ return SynapsTraits<T>::between(r1,r2); }
-		static int					sign_at_negative_infinity(const RationalFunctionP& rf);
+		static long					sign_at_negative_infinity(const RationalFunctionP& rf);
 };
 
 template<class T>
@@ -45,8 +45,8 @@ struct SynapsTraits				///< Suitable for double
 		typedef						Polynomial											SolverPolynomial;
 
 		static RootType				root(CoefficientType r)								{ return r; }
-		static unsigned int			multiplicity(RootType r)							{ return 1; }
-		static int					sign_at(const Polynomial& p, RootType r)			{ return SYNAPS::UPOLDAR::sign_at(p, r); }
+		static unsigned long			multiplicity(RootType r)							{ return 1; }
+		static long					sign_at(const Polynomial& p, RootType r)			{ return SYNAPS::UPOLDAR::sign_at(p, r); }
 		static RootType				between(RootType r1, RootType r2)					{ return (r1 + r2)/2; }
 		static SolverPolynomial		convert(const Polynomial& p)						{ return p; }
 };
@@ -61,8 +61,8 @@ struct SynapsTraits<ZZ>
 		typedef						Solver::root_t										RootType;
 
 		static RootType				root(const CoefficientType& r)						{ CoefficientType p[2] = {-r, 1}; return SYNAPS::solve(Polynomial(2, p), Solver(), 0);}
-		static unsigned int			multiplicity(const RootType& r)						{ return r.multiplicity(); }
-		static int					sign_at(const Polynomial& p, 
+		static unsigned long			multiplicity(const RootType& r)						{ return r.multiplicity(); }
+		static long					sign_at(const Polynomial& p, 
 											const RootType& r)							{ return SYNAPS::ALGEBRAIC::sign_at(p, r); }
 		//static RootType				between(const RootType& r1, const RootType& r2) 	{ RootType r = r1; r += r2; r /= root(2); return r; }
 		static SolverPolynomial		convert(const Polynomial& p)						{ return p; }
@@ -78,8 +78,8 @@ struct SynapsTraits<QQ>
 		typedef						Solver::root_t										RootType;
 
 		static RootType				root(const CoefficientType& r);
-		static unsigned int			multiplicity(const RootType& r)						{ return r.multiplicity(); }
-		static int					sign_at(const Polynomial& p, 
+		static unsigned long			multiplicity(const RootType& r)						{ return r.multiplicity(); }
+		static long					sign_at(const Polynomial& p, 
 											const RootType& r)							{ return SYNAPS::ALGEBRAIC::sign_at(convert(p), r); }
 		//static RootType				between(const RootType& r1, const RootType& r2) 	{ RootType r = r1; r += r2; r /= root(2); return r; }
 		static SolverPolynomial		convert(const Polynomial& p);

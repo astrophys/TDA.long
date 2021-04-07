@@ -66,9 +66,9 @@ Convert files to use longs instead of ints
         #. DONE : src/geometry/euclidean.hpp
         #. DONE : src/geometry/simulator.hpp
         #. DONE : src/geometry/Arbitdistance.h
-        #. src/geometry/l2distance.h
-        #. src/geometry/weighted-cechdistance.h
-        #. src/geometry/polynomial.h
+        #. N/A  : src/geometry/l2distance.h
+        #. N/A  : src/geometry/weighted-cechdistance.h
+        #. DONE : src/geometry/polynomial.h
         #. src/geometry/euclidean.h
         #. src/geometry/weighted-l2distance.h
         #. src/RcppExports.cpp
