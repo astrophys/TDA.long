@@ -13,30 +13,30 @@
 template< typename RealVector, typename IntVector, typename RealMatrix >
 inline void gridBy(
      const RealVector & lim, const double by, IntVector & dim,
-     RealMatrix & grid, unsigned & nGrid) {
+     RealMatrix & grid, unsigned long & nGrid) {
 
-  unsigned nDim = (unsigned)(lim.size() / 2);
+  unsigned long nDim = (unsigned long)(lim.size() / 2);
 
   dim = IntVector(nDim);
-  for (unsigned iDim = 0; iDim < nDim; ++iDim) {
-    dim[iDim] = (unsigned)std::floor((lim[2 * iDim + 1] - lim[2 * iDim]) / by) + 1;
+  for (unsigned long iDim = 0; iDim < nDim; ++iDim) {
+    dim[iDim] = (unsigned long)std::floor((lim[2 * iDim + 1] - lim[2 * iDim]) / by) + 1;
   }
 
   nGrid = std::accumulate(dim.begin(), dim.end(), 1, std::multiplies< double >());
   grid = RealMatrix(nGrid * nDim);
 
   RealVector gridVec(nDim);
-  for (unsigned iDim = 0; iDim < nDim; ++iDim) {
+  for (unsigned long iDim = 0; iDim < nDim; ++iDim) {
     gridVec[iDim] = lim[2 * iDim];
   }
 
-  for (unsigned iGrid = 0; iGrid < nGrid; ++iGrid) {
-    for (unsigned iDim = 0; iDim < nDim; ++iDim) {
+  for (unsigned long iGrid = 0; iGrid < nGrid; ++iGrid) {
+    for (unsigned long iDim = 0; iDim < nDim; ++iDim) {
       grid[iGrid + iDim * nGrid] = gridVec[iDim];
     }
 
     gridVec[0] += by;
-    for (unsigned iDim = 0; iDim < nDim; ++iDim) {
+    for (unsigned long iDim = 0; iDim < nDim; ++iDim) {
       if (gridVec[iDim] > lim[2 * iDim + 1] && iDim + 1 != nDim) {
         gridVec[iDim] = lim[2 * iDim];
         gridVec[iDim + 1] += by;
@@ -70,7 +70,7 @@ template< typename RealVector, typename DimensionVector, typename Print,
 inline void gridFiltration(
     const RealVector            & FUNvalues,
     const DimensionVector       & gridDim,
-    const int                     maxdimension,
+    const long                     maxdimension,
     const std::string           & decomposition,
     const bool                    printProgress,
     const Print                 & print,
@@ -125,15 +125,15 @@ template< typename VertexVector, typename RealVector, typename DimensionVector, 
 inline void gridDiag(
     const RealVector      & FUNvalues,
     const DimensionVector & gridDim,
-    const int               maxdimension,
+    const long               maxdimension,
     const std::string     & decomposition,
     const std::string     & library,
     const bool              location,
     const bool              printProgress,
     const Print           & print,
     std::vector< std::vector< std::vector< double > > > & persDgm,
-    std::vector< std::vector< std::vector< unsigned > > > & persLoc,
-    std::vector< std::vector< std::vector< std::vector< unsigned > > > > & persCycle
+    std::vector< std::vector< std::vector< unsigned long > > > & persLoc,
+    std::vector< std::vector< std::vector< std::vector< unsigned long > > > > & persCycle
 ) {
 
   //Fltr filtration;
