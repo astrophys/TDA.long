@@ -9,9 +9,9 @@ template< typename RealVector, typename RealMatrix, typename Print >
 inline RealVector kde(
     const RealMatrix  & X,
     const RealMatrix  & Grid,
-    const unsigned      nSample,
-    const unsigned      dim,
-    const unsigned      nGrid,
+    const unsigned long nSample,
+    const unsigned long dim,
+    const unsigned long nGrid,
     const double        h,
     const std::string & kertype,
     const RealVector  & weight,
@@ -22,8 +22,8 @@ inline RealVector kde(
   const double h_to_dim = pow(h, (int)dim);
 //  const double den = pow(h, (int)dim) * pow(2 * pi, dim / 2.0);
   RealVector kdeValue;
-  int counter = 0, percentageFloor = 0;
-  int totalCount = nGrid;
+  long counter = 0, percentageFloor = 0;
+  long totalCount = nGrid;
 
   if (printProgress) {
     printProgressFrame(print);
@@ -54,7 +54,7 @@ inline RealVector kde(
         print, counter, totalCount, percentageFloor);
   }
 
-  for (unsigned gridIdx = 0; gridIdx < nGrid; ++gridIdx) {
+  for (unsigned long gridIdx = 0; gridIdx < nGrid; ++gridIdx) {
     kdeValue[gridIdx] /= h_to_dim;
   }
 
@@ -72,9 +72,9 @@ template< typename RealVector, typename RealMatrix, typename Print >
 inline RealVector kdeDist(
     const RealMatrix & X,
     const RealMatrix & Grid,
-    const unsigned     nSample,
-    const unsigned     dim,
-    const unsigned     nGrid,
+    const unsigned long nSample,
+    const unsigned long dim,
+    const unsigned long nGrid,
     const double       h,
     const RealVector & weight,
     const bool         printProgress,
@@ -87,8 +87,8 @@ inline RealVector kdeDist(
   std::vector< double > thirdValue;
   double firstmean;
   RealVector kdeDistValue(nGrid);
-  int counter = 0, percentageFloor = 0;
-  int totalCount = nSample + nGrid;
+  long counter = 0, percentageFloor = 0;
+  long totalCount = nSample + nGrid;
 
   if (printProgress) {
     printProgressFrame(print);
@@ -118,7 +118,7 @@ inline RealVector kdeDist(
       std::accumulate(weight.begin(), weight.end(), 0.0);
   }
 
-  for (unsigned gridIdx = 0; gridIdx < nGrid; ++gridIdx) {
+  for (unsigned long gridIdx = 0; gridIdx < nGrid; ++gridIdx) {
     kdeDistValue[gridIdx] = std::sqrt(firstmean + second - 2 * thirdValue[gridIdx]);
   }
 

@@ -54,8 +54,8 @@ Convert files to use longs instead of ints
         #. .git/hooks/prepare-commit-msg.sample
         #. .git/objects/pack/pack-c0818db4c6043d34fb3f6470042753eacf0c4524.pack
         #. .git/index
-        #. src/diag.cpp
-        #. src/kde.h
+        #. DONE : src/diag.cpp
+        #. DONE : src/kde.h
         #. src/alphaShape.h
         #. src/geometry/kinetic-sort.h
         #. src/geometry/linear-kernel.h
@@ -118,6 +118,6 @@ Convert files to use longs instead of ints
         #. src/tdautils/ripsL2.h
         #. src/tdautils/cgalUtils.h
     #) Commands to replace (in order)
-        #. %s/unsigned/unsigned long/gc
         #. %s/unsigned int/unsigned long/gc
+        #. %s/unsigned/unsigned long/gc
         #. %s/int/long/gc
