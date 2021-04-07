@@ -3,7 +3,7 @@ template<class NumberType_>
 Kernel<NumberType_>::
 Kernel(DimensionType dimension): dimension_(dimension), origin_(dimension)
 {
-	for (unsigned int i = 0; i < dimension; ++i)
+	for (unsigned long i = 0; i < dimension; ++i)
 		origin_(i) = NumberType(0);
 }
 
@@ -32,7 +32,7 @@ template<class NumberType_>
 std::istream&
 operator>>(std::istream& in, typename Kernel<NumberType_>::Point& p)
 {
-	for (unsigned int i = 0; i < p.size(); ++i)
+	for (unsigned long i = 0; i < p.size(); ++i)
 		in >> p[i];
 	return in;
 }
@@ -41,7 +41,7 @@ template<class NumberType_>
 std::ostream&
 operator<<(std::ostream& out, typename Kernel<NumberType_>::Point& p)
 {
-	for (unsigned int i = 0; p.size(); ++i)
+	for (unsigned long i = 0; p.size(); ++i)
 		out << p[i];
 	return out;
 }
@@ -68,18 +68,18 @@ circumsphere(const PointContainer& points) const
 
 	std::vector<Point> basis;
 	basis.reserve(points.size() - 1);
-	for (unsigned int i = 1; i < points.size(); ++i)
+	for (unsigned long i = 1; i < points.size(); ++i)
 	{
 		Point pt = *points[i] - *points[0];
 		basis.push_back(Point(pt, inner_prod(pt, pt)));
-		for (unsigned int j = 0; j < i - 1; ++j)
+		for (unsigned long j = 0; j < i - 1; ++j)
 		{
 			basis[i-1] -= basis[j] * inner_prod(basis[i-1], basis[j]) / inner_prod(basis[j], basis[j]);
 			normalize(basis[i-1]);
 		}
 	}
 	Point clifted(origin(), NumberType(1));
-	for (unsigned int j = 0; j < basis.size(); ++j)
+	for (unsigned long j = 0; j < basis.size(); ++j)
 	{
 		clifted -= basis[j] * inner_prod(clifted, basis[j]) / inner_prod(basis[j], basis[j]);
 		normalize(clifted);
@@ -135,7 +135,7 @@ typename Kernel<NumberType_>::Point&
 Kernel<NumberType_>::
 normalize(Point& p) const
 {
-	for (unsigned int i = 0; i < p.size(); ++i)
+	for (unsigned long i = 0; i < p.size(); ++i)
 		number_traits<typename Point::NumberType>::normalize(p(i));
 	return p;
 }

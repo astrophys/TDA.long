@@ -63,7 +63,7 @@ Convert files to use longs instead of ints
         #. DONE : src/geometry/polynomial.hpp
         #. DONE : src/geometry/simulator.h
         #. DONE : src/geometry/distances.h
-        #. src/geometry/euclidean.hpp
+        #. DONE : src/geometry/euclidean.hpp
         #. src/geometry/simulator.hpp
         #. src/geometry/Arbitdistance.h
         #. src/geometry/l2distance.h
