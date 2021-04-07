@@ -30,7 +30,7 @@ solve(const RationalFunctionP& rf, RootStack& stack)
 }
 
 template<class T>
-int
+long
 UPolynomial<T>::
 sign_at(const RationalFunctionP& rf, const RootType& r)
 {
@@ -38,14 +38,14 @@ sign_at(const RationalFunctionP& rf, const RootType& r)
 }
 
 template<class T>
-int
+long
 UPolynomial<T>::
 sign_at_negative_infinity(const RationalFunctionP& rf)
 {
 	const Polynomial& num = rf.numerator();
 	const Polynomial& den = rf.denominator();
-	int ndegree = num.get_degree();
-	int ddegree = den.get_degree();
+	long ndegree = num.get_degree();
+	long ddegree = den.get_degree();
     if (ndegree == -1) return 0;          // ndegree == -1 => num == 0, and 0 is 0 at -infinity
 	return !((((ndegree + 1) % 2 == 0) ^ (num[ndegree] > 0)) ^
 		     (((ddegree + 1) % 2 == 0) ^ (den[ddegree] > 0))) ? 1:-1;
@@ -66,9 +66,9 @@ convert(const Polynomial& p)
 	SolverPolynomial result(1, p.size() - 1);
 	assert(result.size() == p.size());
 	ZZ denominator_product = 1;
-	for (unsigned int i = 0; i < p.size(); ++i)
+	for (unsigned long i = 0; i < p.size(); ++i)
 		denominator_product *= SYNAPS::denominator(p[i]);
-	for (unsigned int i = 0; i < p.size(); ++i)
+	for (unsigned long i = 0; i < p.size(); ++i)
 		result[i] = SYNAPS::numerator(p[i]) * denominator_product / 
 					SYNAPS::denominator(p[i]);
 	return result;

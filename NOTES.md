@@ -59,7 +59,7 @@ Convert files to use longs instead of ints
         #. DONE : src/alphaShape.h
         #. N/A  : src/geometry/kinetic-sort.h
         #. DONE : src/geometry/linear-kernel.h
-        #. src/geometry/NOTES
+        #. N/A  : src/geometry/NOTES
         #. src/geometry/polynomial.hpp
         #. src/geometry/simulator.h
         #. src/geometry/distances.h
