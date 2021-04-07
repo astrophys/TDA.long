@@ -60,8 +60,8 @@ Convert files to use longs instead of ints
         #. N/A  : src/geometry/kinetic-sort.h
         #. DONE : src/geometry/linear-kernel.h
         #. N/A  : src/geometry/NOTES
-        #. src/geometry/polynomial.hpp
-        #. src/geometry/simulator.h
+        #. DONE : src/geometry/polynomial.hpp
+        #. DONE : src/geometry/simulator.h
         #. src/geometry/distances.h
         #. src/geometry/euclidean.hpp
         #. src/geometry/simulator.hpp

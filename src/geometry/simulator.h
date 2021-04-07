@@ -55,15 +55,15 @@ class Simulator
         Time                        next_event_time() const                     { return queue_.empty() ? std::numeric_limits<Time>::infinity():(*queue_.top())->root_stack().top(); }
 
         Event*                      top() const                                 { return *(queue_.top()); }
-        unsigned                    size() const                                { return queue_.size(); }
-        unsigned                    event_count() const                         { return count_; }
+        unsigned long               size() const                                { return queue_.size(); }
+        unsigned long               event_count() const                         { return count_; }
 
         std::ostream&               operator<<(std::ostream& out) const;
 
     private:
         Time                        current_;
         EventQueueS                 queue_;
-        unsigned                    count_;
+        unsigned long               count_;
 };
 
 
