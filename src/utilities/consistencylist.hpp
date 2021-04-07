@@ -42,7 +42,7 @@ insert(iterator p, const_reference x)
 
 /* OrderComparison */
 template<class T>
-int 
+long 
 ConsistencyList<T>::
 OrderComparison::compare(ComparableType a, ComparableType b) const
 {
@@ -53,7 +53,7 @@ OrderComparison::compare(ComparableType a, ComparableType b) const
 
 /* LessThanComparison */
 template<class T>
-int ConsistencyList<T>::LessThanComparison::compare(ComparableType a, ComparableType b) const
+long ConsistencyList<T>::LessThanComparison::compare(ComparableType a, ComparableType b) const
 { return Parent::compare(a,b); }
 
 template<class T>
@@ -63,7 +63,7 @@ bool ConsistencyList<T>::LessThanComparison::operator()(ComparableType a, Compar
 
 /* GreaterThanComparison */
 template<class T>
-int ConsistencyList<T>::GreaterThanComparison::compare(ComparableType a, ComparableType b) const
+long ConsistencyList<T>::GreaterThanComparison::compare(ComparableType a, ComparableType b) const
 { return -Parent::compare(a,b); }
 
 template<class T>
@@ -73,7 +73,7 @@ bool ConsistencyList<T>::GreaterThanComparison::operator()(ComparableType a, Com
 
 /* ConsistencyComparison */
 template<class T>
-int ConsistencyList<T>::ConsistencyComparison::compare(ComparableType a, ComparableType b) const
+long ConsistencyList<T>::ConsistencyComparison::compare(ComparableType a, ComparableType b) const
 { 
 	if (a.get_base()->consistency < b.get_base()->consistency) 			return -1;
 	else if (a.get_base()->consistency == b.get_base()->consistency)	return 0;
