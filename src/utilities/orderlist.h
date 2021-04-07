@@ -26,7 +26,7 @@
 //#include <boost/utility/enable_if.hpp>
 
 
-typedef					unsigned int					OrderType;
+typedef					unsigned long					OrderType;
 
 template<class T> 		struct 	OrderListNode;
 template<class T>		class   OrderListIterator;
@@ -102,7 +102,7 @@ class OrderList<T>::OrderComparison
 {
 	public:
 		typedef			typename OrderList<T>::const_iterator		ComparableType;
-		int 			compare(ComparableType a, ComparableType b) const;				/// (-1,0,1) = a (precedes, ==, succeeds) b
+		long 			compare(ComparableType a, ComparableType b) const;				/// (-1,0,1) = a (precedes, ==, succeeds) b
 		bool			operator()(ComparableType a, ComparableType b) const;
 };
 
@@ -110,7 +110,7 @@ class OrderList<T>::OrderComparison
 template<class T>
 struct OrderListNode
 {
-	OrderListNode(const T& d, unsigned int t):
+	OrderListNode(const T& d, unsigned long t):
 		data(d), tag(t)
 	{}
 
