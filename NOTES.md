@@ -57,8 +57,8 @@ Convert files to use longs instead of ints
         #. DONE : src/diag.cpp
         #. DONE : src/kde.h
         #. DONE : src/alphaShape.h
-        #. src/geometry/kinetic-sort.h
-        #. src/geometry/linear-kernel.h
+        #. N/A  : src/geometry/kinetic-sort.h
+        #. DONE : src/geometry/linear-kernel.h
         #. src/geometry/NOTES
         #. src/geometry/polynomial.hpp
         #. src/geometry/simulator.h
