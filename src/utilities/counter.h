@@ -40,7 +40,7 @@ class Counter
     public:
         typedef                 unsigned long                           CounterType;
         typedef                 std::map<std::string, Counter*>         SubCounterMap;
-        typedef                 std::map<int, CounterType>              SubCountMap;
+        typedef                 std::map<long, CounterType>              SubCountMap;
 
     public:
         CounterType             count;
