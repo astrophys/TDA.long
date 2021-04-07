@@ -41,7 +41,7 @@ class ExplicitDistances
  *
  * Container_ is assumed to be an std::vector. That simplifies a number of things.
  */
-template<class Container_, class Distance_, typename Index_ = unsigned>
+template<class Container_, class Distance_, typename Index_ = unsigned long>
 class PairwiseDistances
 {
     public:
