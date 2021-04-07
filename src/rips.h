@@ -41,8 +41,8 @@ template< typename IntVector, typename RealMatrix, typename VectorList,
           typename RealVector, typename Print >
 inline void ripsFiltration(
     const RealMatrix  & X,
-    const unsigned      nSample,
-    const unsigned      nDim,
+    const unsigned long      nSample,
+    const unsigned long      nDim,
     const int           maxdimension,
     const double        maxscale,
     const std::string & dist,
@@ -111,9 +111,9 @@ inline void ripsFiltration(
 template< typename RealMatrix, typename Print >
 inline void ripsDiag(
     const RealMatrix  & X,
-    const unsigned      nSample,
-    const unsigned      nDim,
-    const int           maxdimension,
+    const unsigned long nSample,
+    const unsigned long nDim,
+    const long          maxdimension,
     const double        maxscale,
     const std::string & dist,
     const std::string & libraryFiltration,
@@ -122,8 +122,8 @@ inline void ripsDiag(
     const bool          printProgress,
     const Print       & print,
     std::vector< std::vector< std::vector< double > > > & persDgm,
-    std::vector< std::vector< std::vector< unsigned > > > & persLoc,
-    std::vector< std::vector< std::vector< std::vector< unsigned > > > > & persCycle
+    std::vector< std::vector< std::vector< unsigned long > > > & persLoc,
+    std::vector< std::vector< std::vector< std::vector< unsigned long > > > > & persCycle
 ) {
 
   if (libraryFiltration[0] == 'G') {
@@ -133,7 +133,7 @@ inline void ripsDiag(
 
     // Compute the persistence diagram of the complex
     if (libraryDiag[0] == 'G') {
-      int p = 2; //characteristic of the coefficient field for homology
+      long p = 2; //characteristic of the coefficient field for homology
       double min_persistence = 0; //minimal length for persistent intervals
       FiltrationDiagGudhi(
           smplxTree, p, min_persistence, maxdimension, printProgress, persDgm);
@@ -171,7 +171,7 @@ inline void ripsDiag(
       else if (libraryDiag[0] == 'G') {
         Gudhi::Simplex_tree<> smplxTree =
             filtrationDionysusToGudhi< Gudhi::Simplex_tree<> >(filtration);
-        int p = 2; //characteristic of the coefficient field for homology
+        long p = 2; //characteristic of the coefficient field for homology
         double min_persistence = 0; //minimal length for persistent intervals
         FiltrationDiagGudhi(
             smplxTree, p, min_persistence, maxdimension, printProgress,
@@ -203,7 +203,7 @@ inline void ripsDiag(
       else if (libraryDiag[0] == 'G') {
         Gudhi::Simplex_tree<> smplxTree =
             filtrationDionysusToGudhi< Gudhi::Simplex_tree<> >(filtration);
-        int p = 2; //characteristic of the coefficient field for homology
+        long p = 2; //characteristic of the coefficient field for homology
         double min_persistence = 0; //minimal length for persistent intervals
         FiltrationDiagGudhi(
             smplxTree, p, min_persistence, maxdimension, printProgress,

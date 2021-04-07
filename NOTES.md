@@ -108,7 +108,7 @@ Convert files to use longs instead of ints
         #. DONE : src/topology/cohomology-persistence.h
         #. DONE : src/topology/static-persistence.h
         #. DONE : src/alphaComplex.h
-        #. src/rips.h
+        #. DONE : src/rips.h
         #. src/tdautils/typecastUtils.h
         #. src/tdautils/gridUtils.h
         #. src/tdautils/filtrationDiag.h
