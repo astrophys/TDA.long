@@ -50,10 +50,10 @@ class ZigzagPersistence
 
         struct ZNode
         {
-                                        ZNode(int o, BIndex l):
+                                        ZNode(long o, BIndex l):
                                             order(o), low(l)                            {}
 
-            int                         order;
+            long                        order;
             ZColumn                     z_column;
             BRow                        b_row;
             BIndex                      low;            // which BColumn has this ZIndex as low
@@ -64,19 +64,19 @@ class ZigzagPersistence
 
         struct BNode
         {
-                                        BNode(unsigned o): order(o)                     {}
+                                        BNode(unsigned long o): order(o)                     {}
 
-            unsigned                    order;
+            unsigned long               order;
             BColumn                     b_column;
             CColumn                     c_column;
         };
 
         struct SimplexNode: public SimplexData
         {
-                                        SimplexNode(unsigned o, ZIndex l):
+                                        SimplexNode(unsigned long o, ZIndex l):
                                             order(o), low(l)                            {}
 
-            unsigned                    order;
+            unsigned long               order;
             ZRow                        z_row;
             CRow                        c_row;
             ZIndex                      low;            // which ZColumn has this SimplexNode as low
