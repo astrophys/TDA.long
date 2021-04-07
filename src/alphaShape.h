@@ -28,20 +28,20 @@
 template< typename RealMatrix, typename Print >
 void alphaShapeDiag(
   const RealMatrix  & X,             //points to some memory space
-  const unsigned      nSample,
-  const unsigned      nDim,
-  const int           maxdimension,
+  const unsigned long nSample,
+  const unsigned long nDim,
+  const long          maxdimension,
   const std::string & libraryDiag,
   const bool          location,
   const bool          printProgress,
   const Print       & print,
   std::vector< std::vector< std::vector< double > > > & persDgm,
-  std::vector< std::vector< std::vector< unsigned > > > & persLoc,
-  std::vector< std::vector< std::vector< std::vector< unsigned > > > > & persCycle,
+  std::vector< std::vector< std::vector< unsigned long > > > & persLoc,
+  std::vector< std::vector< std::vector< std::vector< unsigned long > > > > & persCycle,
   RealMatrix        & coordinates
 ) {
 
-  int coeff_field_characteristic = 2;
+  long coeff_field_characteristic = 2;
 
   float min_persistence = 0.0;
 

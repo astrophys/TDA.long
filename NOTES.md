@@ -56,7 +56,7 @@ Convert files to use longs instead of ints
         #. .git/index
         #. DONE : src/diag.cpp
         #. DONE : src/kde.h
-        #. src/alphaShape.h
+        #. DONE : src/alphaShape.h
         #. src/geometry/kinetic-sort.h
         #. src/geometry/linear-kernel.h
         #. src/geometry/NOTES
