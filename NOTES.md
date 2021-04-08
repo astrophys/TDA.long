@@ -114,8 +114,8 @@ Convert files to use longs instead of ints
         #. DONE : src/tdautils/filtrationDiag.h
         #. DONE : src/tdautils/dionysusUtils.h
         #. DONE : src/tdautils/kernelUtils.h
-        #. src/tdautils/ripsArbit.h
-        #. src/tdautils/ripsL2.h
+        #. N/A  : src/tdautils/ripsArbit.h
+        #. N/A  : src/tdautils/ripsL2.h
         #. src/tdautils/cgalUtils.h
     #) Commands to replace (in order)
         #. %s/unsigned int/unsigned long/gc
