@@ -53,9 +53,9 @@ private:
 
 
 template< typename VertexList, typename Evaluator >
-unsigned getLocation(const VertexList & vertices, const Evaluator & evaluator) {
+unsigned long getLocation(const VertexList & vertices, const Evaluator & evaluator) {
   typename VertexList::const_iterator vertexItr;
-  unsigned vertex = *(vertices.begin());
+  unsigned long vertex = *(vertices.begin());
 	for (vertexItr = vertices.begin(); vertexItr != vertices.end(); ++vertexItr) {
 		if (evaluator[*vertexItr] > evaluator[vertex]) {
 			vertex = *vertexItr;
@@ -71,7 +71,7 @@ template< typename Diagrams, typename Iterator, typename Evaluator,
 inline void initDiagrams(
     Diagrams & diagrams, const Iterator & bg, const Iterator & end,
     const Evaluator & evaluator, const SimplexMap & m,
-		const unsigned maxdimension) {
+		const unsigned long maxdimension) {
 
 	diagrams.resize(maxdimension + 1);
 	typename Diagrams::value_type::value_type dgmPoint(2);
@@ -87,7 +87,7 @@ inline void initDiagrams(
 
 				const typename SimplexMap::value_type & b = m[cur];
 				const typename SimplexMap::value_type & d = m[death];
-				if ((unsigned)b.dimension() > maxdimension) {
+				if ((unsigned long)b.dimension() > maxdimension) {
 					continue;
 				}
 				if (evaluator(b) < evaluator(d)) {
@@ -99,7 +99,7 @@ inline void initDiagrams(
 			else {    // cycles can be unpaired
 				const typename SimplexMap::value_type& b = m[cur];
 				dgmPoint[0] = evaluator(b);
-				if ((unsigned)b.dimension() > maxdimension) {
+				if ((unsigned long)b.dimension() > maxdimension) {
 					continue;
 				}
 				dgmPoint[1] = std::numeric_limits< double >::infinity();
@@ -117,9 +117,9 @@ template< typename Simplex, typename Locations, typename Cycles,
 inline void initLocations(
     Locations & locations, Cycles & cycles, const Persistence & p,
     const Evaluator & evaluator, const SimplexMap & m,
-    const unsigned maxdimension, const Filtration & filtration) {
+    const unsigned long maxdimension, const Filtration & filtration) {
 
-	unsigned verticesMax = 0;
+	unsigned long verticesMax = 0;
 	for (typename Filtration::Index iFltr = filtration.begin();
        iFltr != filtration.end(); ++iFltr) {
 		const typename Filtration::Simplex & c = filtration.simplex(iFltr);
@@ -159,7 +159,7 @@ inline void initLocations(
 				//const typename SimplexMap::value_type& d = m[death];
         const typename Filtration::Simplex & b = m[cur];
         const typename Filtration::Simplex & d = m[death];
-				if ((unsigned)b.dimension() > maxdimension) {
+				if ((unsigned long)b.dimension() > maxdimension) {
 					continue;
 				}
 				if (evaluator(b) < evaluator(d)) {
@@ -187,11 +187,11 @@ inline void initLocations(
 			}
 			else {    // cycles can be unpaired
 				const typename SimplexMap::value_type& b = m[cur];
-				if ((unsigned)b.dimension() > maxdimension) {
+				if ((unsigned long)b.dimension() > maxdimension) {
 					continue;
 				}
 				persLocPoint[0] = getLocation(b.vertices(), verticesValues);
-				persLocPoint[1] = (unsigned)(
+				persLocPoint[1] = (unsigned long)(
             std::max_element(verticesValues.begin(), verticesValues.end())
             - verticesValues.begin() + 1);
 				locations[b.dimension()].push_back(persLocPoint);
@@ -231,12 +231,12 @@ inline void initLocations(
 template< typename Persistence, typename Filtration >
 void FiltrationDiagDionysus(
     const Filtration                                      & filtration,
-    const int                                               maxdimension,
+    const long                                               maxdimension,
     const bool                                              location,
     const bool                                              printProgress,
     std::vector< std::vector< std::vector< double > > >   & persDgm,
-    std::vector< std::vector< std::vector< unsigned > > > & persLoc,
-    std::vector< std::vector< std::vector< std::vector< unsigned > > > > & persCycle
+    std::vector< std::vector< std::vector< unsigned long > > > & persLoc,
+    std::vector< std::vector< std::vector< std::vector< unsigned long > > > > & persCycle
 ) {
 
 	Timer persistence_timer;
@@ -351,10 +351,10 @@ template< typename Distances, typename Generator, typename Filtration,
           typename RealMatrix, typename Print >
 inline Filtration RipsFiltrationDionysus(
     const RealMatrix & X,
-    const unsigned     nSample, 
-    const unsigned     nDim,
+    const unsigned long     nSample, 
+    const unsigned long     nDim,
     const bool         is_row_names,
-    const int          maxdimension,
+    const long          maxdimension,
     const double       maxscale,
     const bool         printProgress,
     const Print      & print
