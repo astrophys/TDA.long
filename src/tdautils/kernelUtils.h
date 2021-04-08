@@ -3,7 +3,7 @@
 #include <map>
 
 // read element of matrix
-double ReadMat(double*XX, int *pNN, int *pDD, int i, int d){
+double ReadMat(double*XX, long *pNN, long *pDD, long i, long d){
 	double out=0.0;
 	out=XX[(d-1)*(pNN[0])+i-1];
 	return out;
@@ -11,7 +11,7 @@ double ReadMat(double*XX, int *pNN, int *pDD, int i, int d){
 
 
 // write element of matrix
-void WriteMat(double*XX, int *pNN, int *pDD, int i, int d, double input){
+void WriteMat(double*XX, long *pNN, long *pDD, long i, long d, double input){
 	XX[(d-1)*(pNN[0])+i-1]=input;
 }
 
@@ -29,11 +29,11 @@ inline void printProgressFrame(Print print) {
 
 // print progress amount
 template <typename Print>
-inline void printProgressAmount(Print print, int& counter, const int totalCount, int& percentageFloor) {
+inline void printProgressAmount(Print print, long& counter, const long totalCount, long& percentageFloor) {
 
-	int progressAmount = std::floor((100 * (++counter) / totalCount - percentageFloor) / 2);
+	long progressAmount = std::floor((100 * (++counter) / totalCount - percentageFloor) / 2);
 	if (progressAmount > 0) {
-		for (int progressIdx = 1; progressIdx <= progressAmount; ++progressIdx) {
+		for (long progressIdx = 1; progressIdx <= progressAmount; ++progressIdx) {
 			print("*");
 			percentageFloor += 2;
 		}
@@ -44,10 +44,10 @@ inline void printProgressAmount(Print print, int& counter, const int totalCount,
 // get row of matrix
 template <typename RealVector, typename RealMatrix>
 inline RealVector matrixRow(
-    const RealMatrix & X, const unsigned nX, const unsigned dim,
-    const unsigned rowIdx) {
+    const RealMatrix & X, const unsigned long nX, const unsigned long dim,
+    const unsigned long rowIdx) {
 	RealVector rowVector(dim);
-	for (unsigned colIdx = 0; colIdx < dim; ++colIdx) {
+	for (unsigned long colIdx = 0; colIdx < dim; ++colIdx) {
 		rowVector[colIdx] = X[rowIdx + colIdx * nX];
 	}
 	return rowVector;
@@ -102,18 +102,18 @@ inline double epanechnikovSquare(double xSquare) {
 // oneKernel
 template <typename RealVector1, typename RealVector2, typename RealMatrix>
 inline double oneKernel(
-    const RealVector1 & point, const RealMatrix & X, const unsigned nSample,
+    const RealVector1 & point, const RealMatrix & X, const unsigned long nSample,
     const double hSquare, double (* kernelSquare)(const double),
     const RealVector2 & weight) {
 
-	const unsigned dim = point.size();
+	const unsigned long dim = point.size();
 	double sum, tmp;
 	double oneKernelValue = 0.0;
 
 	if (weight.size() == 1) {
-		for (unsigned sampleIdx = 0; sampleIdx < nSample; ++sampleIdx) {
+		for (unsigned long sampleIdx = 0; sampleIdx < nSample; ++sampleIdx) {
 			sum = 0.0;
-			for (unsigned dimIdx = 0; dimIdx < dim; ++dimIdx) {
+			for (unsigned long dimIdx = 0; dimIdx < dim; ++dimIdx) {
 				tmp = point[dimIdx] - X[sampleIdx + dimIdx * nSample];
 				sum += tmp * tmp;
 			}
@@ -123,9 +123,9 @@ inline double oneKernel(
 
 	}
 	else {
-		for (unsigned sampleIdx = 0; sampleIdx < nSample; ++sampleIdx) {
+		for (unsigned long sampleIdx = 0; sampleIdx < nSample; ++sampleIdx) {
 			sum = 0.0;
-			for (unsigned dimIdx = 0; dimIdx < dim; ++dimIdx) {
+			for (unsigned long dimIdx = 0; dimIdx < dim; ++dimIdx) {
 				tmp = point[dimIdx] - X[sampleIdx + dimIdx * nSample];
 				sum += tmp * tmp;
 			}
@@ -139,17 +139,17 @@ inline double oneKernel(
 // computes kernel with directly calculating ||X_i - Y_j||^2
 template<typename RealVector1, typename RealMatrix1, typename RealMatrix2, typename RealVector2, typename Print>
 inline RealVector1 computeKernel(
-    const RealMatrix1 & X, const RealMatrix2 & Y, const unsigned nX,
-    const unsigned dim, const unsigned nY, const double hSquare,
+    const RealMatrix1 & X, const RealMatrix2 & Y, const unsigned long nX,
+    const unsigned long dim, const unsigned long nY, const double hSquare,
     double(*kernelSquare)(const double), const RealVector2 & weight,
-    const bool printProgress, Print print, int & counter, int & totalCount,
-    int & percentageFloor) {
+    const bool printProgress, Print print, long & counter, long & totalCount,
+    long & percentageFloor) {
 
 	RealVector1 kernelValue(nY);
 
 	if (printProgress) {
 
-		for (unsigned yIdx = 0; yIdx < nY; ++yIdx) {
+		for (unsigned long yIdx = 0; yIdx < nY; ++yIdx) {
 			kernelValue[yIdx] = oneKernel(
 				  matrixRow< std::vector< double > >(Y, nY, dim, yIdx), X, nX, hSquare,
           kernelSquare, weight);
@@ -159,7 +159,7 @@ inline RealVector1 computeKernel(
 		}
 	}
 	else { //no printProgress
-		for (unsigned yIdx = 0; yIdx < nY; ++yIdx) {
+		for (unsigned long yIdx = 0; yIdx < nY; ++yIdx) {
 			kernelValue[yIdx] = oneKernel(
 				  matrixRow< std::vector< double > >(Y, nY, dim, yIdx), X, nX, hSquare,
           kernelSquare, weight);
@@ -176,27 +176,27 @@ inline RealVector1 computeKernel(
 // correspond to which value in GridMargin
 template <typename RealMatrix, typename RealVector, typename NonnegativeMatrix>
 inline void marginalizeGrid(
-    const RealMatrix & Grid, const unsigned dim, const unsigned nGrid,
+    const RealMatrix & Grid, const unsigned long dim, const unsigned long nGrid,
     RealVector & GridMargin, NonnegativeMatrix & marginIndex) {
 
 	marginIndex = NonnegativeMatrix(dim * nGrid);
-	std::map< double, unsigned > GridMarginMap;
-	for (unsigned dimIdx = 0, mgnIdx = 0; dimIdx < dim; ++dimIdx) {
+	std::map< double, unsigned long > GridMarginMap;
+	for (unsigned long dimIdx = 0, mgnIdx = 0; dimIdx < dim; ++dimIdx) {
 		GridMarginMap.clear();
-		for (unsigned gridIdx = 0; gridIdx < nGrid; ++gridIdx) {
+		for (unsigned long gridIdx = 0; gridIdx < nGrid; ++gridIdx) {
 			if (GridMarginMap.find(Grid[gridIdx + dimIdx * nGrid]) ==
 					GridMarginMap.end()) {
-				GridMarginMap.insert(std::pair< double, unsigned >(
+				GridMarginMap.insert(std::pair< double, unsigned long >(
 						Grid[gridIdx + dimIdx * nGrid], 0));
 			}
 		}
 		GridMargin.resize(GridMargin.size() + GridMarginMap.size());
-		for (std::map< double, unsigned >::iterator marginMapItr = GridMarginMap.begin();
+		for (std::map< double, unsigned long >::iterator marginMapItr = GridMarginMap.begin();
 		marginMapItr != GridMarginMap.end(); ++marginMapItr, ++mgnIdx) {
 			GridMargin[mgnIdx] = marginMapItr->first;
 			marginMapItr->second = mgnIdx;
 		}
-		for (unsigned gridIdx = 0; gridIdx < nGrid; ++gridIdx) {
+		for (unsigned long gridIdx = 0; gridIdx < nGrid; ++gridIdx) {
 			marginIndex[dimIdx + gridIdx * dim] =
 				GridMarginMap.find(Grid[gridIdx + dimIdx * nGrid])->second;
 		}
@@ -209,16 +209,16 @@ inline void marginalizeGrid(
 template< typename RealMatrix, typename RealVector1, typename RealVector2,
           typename Print >
 inline RealMatrix GaussOuter(
-    const RealVector1 & X, const RealVector2 & Y, const unsigned yNum,
+    const RealVector1 & X, const RealVector2 & Y, const unsigned long yNum,
     const double h, double(*kernel)(const double), bool printProgress,
-    Print print, int & counter, const int totalCount, int & percentageFloor) {
+    Print print, long & counter, const long totalCount, long & percentageFloor) {
 
-	const unsigned xNum = X.size();
-	//const unsigned yNum = Y.length();
+	const unsigned long xNum = X.size();
+	//const unsigned long yNum = Y.length();
 	RealMatrix outerProd(xNum * yNum);
 	if (printProgress) {
-		for (unsigned xIdx = 0; xIdx < xNum; ++xIdx) {
-			for (unsigned yIdx = 0; yIdx < yNum; ++yIdx) {
+		for (unsigned long xIdx = 0; xIdx < xNum; ++xIdx) {
+			for (unsigned long yIdx = 0; yIdx < yNum; ++yIdx) {
         outerProd[yIdx + xIdx * yNum] = kernel((X[xIdx] - Y[yIdx]) / h);
 					//exp(-(X[xIdx] - Y[yIdx]) * (X[xIdx] - Y[yIdx]) / (2 * h * h));
 			}
@@ -226,8 +226,8 @@ inline RealMatrix GaussOuter(
 		}
 	}
 	else {
-		for (unsigned xIdx = 0; xIdx < xNum; ++xIdx) {
-			for (unsigned yIdx = 0; yIdx < yNum; ++yIdx) {
+		for (unsigned long xIdx = 0; xIdx < xNum; ++xIdx) {
+			for (unsigned long yIdx = 0; yIdx < yNum; ++yIdx) {
 				outerProd[yIdx + xIdx * yNum] = kernel((X[xIdx] - Y[yIdx]) / h);
 //					exp(-(X[xIdx] - Y[yIdx]) * (X[xIdx] - Y[yIdx]) / (2 * h * h));
 			}
@@ -243,18 +243,18 @@ template< typename RealVector1, typename RealMatrix,
           typename NonnegativeMatrix, typename RealVector2, typename Print >
 inline RealVector1 productCross(const RealMatrix & outerValue,
 		const NonnegativeMatrix & marginIndex, const RealVector2 & weight,
-		const unsigned nSample, const unsigned dim, const unsigned nGrid,
-		bool printProgress, Print print, int & counter, const int totalCount,
-		int & percentageFloor) {
+		const unsigned long nSample, const unsigned long dim, const unsigned long nGrid,
+		bool printProgress, Print print, long & counter, const long totalCount,
+		long & percentageFloor) {
 
 	RealVector1 gridValue(nGrid);
 	if (printProgress) {
 		if (weight.size() == 1) {
-			for (unsigned gridIdx = 0; gridIdx < nGrid; ++gridIdx) {
+			for (unsigned long gridIdx = 0; gridIdx < nGrid; ++gridIdx) {
 				gridValue[gridIdx] = 0.0;
-				for (unsigned sampleIdx = 0; sampleIdx < nSample; ++sampleIdx) {
+				for (unsigned long sampleIdx = 0; sampleIdx < nSample; ++sampleIdx) {
 					double tmp = 1.0;
-					for (unsigned dimIdx = 0; dimIdx < dim; ++dimIdx) {
+					for (unsigned long dimIdx = 0; dimIdx < dim; ++dimIdx) {
 						tmp *= outerValue[sampleIdx + dimIdx * nSample +
 							marginIndex[dimIdx + gridIdx * dim] * dim * nSample];
 					}
@@ -265,12 +265,12 @@ inline RealVector1 productCross(const RealMatrix & outerValue,
 			}
 		}
 		else {
-			const unsigned weightSum = std::accumulate(weight.begin(), weight.end(), 0.0);
-			for (unsigned gridIdx = 0; gridIdx < nGrid; ++gridIdx) {
+			const unsigned long weightSum = std::accumulate(weight.begin(), weight.end(), 0.0);
+			for (unsigned long gridIdx = 0; gridIdx < nGrid; ++gridIdx) {
 				gridValue[gridIdx] = 0.0;
-				for (unsigned sampleIdx = 0; sampleIdx < nSample; ++sampleIdx) {
+				for (unsigned long sampleIdx = 0; sampleIdx < nSample; ++sampleIdx) {
 					double tmp = 1.0;
-					for (unsigned dimIdx = 0; dimIdx < dim; ++dimIdx) {
+					for (unsigned long dimIdx = 0; dimIdx < dim; ++dimIdx) {
 						tmp *= outerValue[sampleIdx + dimIdx * nSample +
 							marginIndex[dimIdx + gridIdx * dim] * nSample * dim];
 					}
@@ -283,11 +283,11 @@ inline RealVector1 productCross(const RealMatrix & outerValue,
 	}
 	else {
 		if (weight.size() == 1) {
-			for (unsigned gridIdx = 0; gridIdx < nGrid; ++gridIdx) {
+			for (unsigned long gridIdx = 0; gridIdx < nGrid; ++gridIdx) {
 				gridValue[gridIdx] = 0.0;
-				for (unsigned sampleIdx = 0; sampleIdx < nSample; ++sampleIdx) {
+				for (unsigned long sampleIdx = 0; sampleIdx < nSample; ++sampleIdx) {
 					double tmp = 1.0;
-					for (unsigned dimIdx = 0; dimIdx < dim; ++dimIdx) {
+					for (unsigned long dimIdx = 0; dimIdx < dim; ++dimIdx) {
 						tmp *= outerValue[sampleIdx + dimIdx * nSample +
 							marginIndex[dimIdx + gridIdx * dim] * dim * nSample];
 					}
@@ -297,12 +297,12 @@ inline RealVector1 productCross(const RealMatrix & outerValue,
 			}
 		}
 		else {
-			const unsigned weightSum = std::accumulate(weight.begin(), weight.end(), 0.0);
-			for (unsigned gridIdx = 0; gridIdx < nGrid; ++gridIdx) {
+			const unsigned long weightSum = std::accumulate(weight.begin(), weight.end(), 0.0);
+			for (unsigned long gridIdx = 0; gridIdx < nGrid; ++gridIdx) {
 				gridValue[gridIdx] = 0.0;
-				for (unsigned sampleIdx = 0; sampleIdx < nSample; ++sampleIdx) {
+				for (unsigned long sampleIdx = 0; sampleIdx < nSample; ++sampleIdx) {
 					double tmp = 1.0;
-					for (unsigned dimIdx = 0; dimIdx < dim; ++dimIdx) {
+					for (unsigned long dimIdx = 0; dimIdx < dim; ++dimIdx) {
 						tmp *= outerValue[sampleIdx + dimIdx * nSample +
 							marginIndex[dimIdx + gridIdx * dim] * nSample * dim];
 					}
@@ -322,14 +322,14 @@ inline RealVector1 productCross(const RealMatrix & outerValue,
 template< typename RealVector1, typename RealMatrix, typename RealVector2,
           typename Print >
 inline RealVector1 computeGaussOuter(
-    const RealMatrix & X, const RealMatrix & Grid, const unsigned nSample,
-    const unsigned dim, const unsigned nGrid, const double h,
+    const RealMatrix & X, const RealMatrix & Grid, const unsigned long nSample,
+    const unsigned long dim, const unsigned long nGrid, const double h,
     double(*kernel)(const double), const RealVector2 & weight,
-    const bool printProgress, Print print, int & counter, int & totalCount,
-    int & percentageFloor) {
+    const bool printProgress, Print print, long & counter, long & totalCount,
+    long & percentageFloor) {
 	
 	std::vector< double > GridMargin, gaussOuter;
-	std::vector< unsigned > marginIndex;
+	std::vector< unsigned long > marginIndex;
 	RealVector1 gaussValue(nGrid);
 
 	marginalizeGrid(Grid, dim, nGrid, GridMargin, marginIndex);

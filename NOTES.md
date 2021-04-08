@@ -113,7 +113,7 @@ Convert files to use longs instead of ints
         #. DONE : src/tdautils/gridUtils.h
         #. DONE : src/tdautils/filtrationDiag.h
         #. DONE : src/tdautils/dionysusUtils.h
-        #. src/tdautils/kernelUtils.h
+        #. DONE : src/tdautils/kernelUtils.h
         #. src/tdautils/ripsArbit.h
         #. src/tdautils/ripsL2.h
         #. src/tdautils/cgalUtils.h
