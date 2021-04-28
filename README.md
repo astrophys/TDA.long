@@ -22,8 +22,12 @@ Steps :
 
 0. `git clone https://github.com/astrophys/TDA.long.git`
 1. `cd TDA.long`
-2. `install.packages("devtools")`
-3. `devtools::install("path/to/TDA.long")`
+2. `R`
+3. `> install.packages("devtools")`
+3. `> .libPaths = .libPaths("~/Scratch/4.0.0-lib_TDA.long-dev/")  # Or whatever path you want`
+4. Ensure that `~/.R/Makevars` has set environmental variables correctly (perhaps you want to pass `-ggdb -O0`
+    a) Consider setting `CFLAGS`, `CXXFLAGS`, `CXX11FLAGS`, `CXX14FLAGS`, `CXX17FLAGS`, `CXX20FLAGS`
+4. `devtools::install("path/to/TDA.long")`
 
 ## Running :
 
